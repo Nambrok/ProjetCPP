@@ -1,7 +1,18 @@
 #include "tank.h"
 
+int Tank::getNbObus2() const
+{
+    return nbObus2;
+}
+
+int Tank::getNbObus3() const
+{
+    return nbObus3;
+}
+
 Tank::Tank() : Obstacle(-10)
 {
+    capacite = 100;
 
 }
 
@@ -36,15 +47,3 @@ bool Tank::useObus3()
         return false;
     }
 }
-
-int Tank::getNbObus2()
-{
-    return nbObus2;
-}
-
-int Tank::getNbObus3()
-{
-    return nbObus3;
-}
-
-
