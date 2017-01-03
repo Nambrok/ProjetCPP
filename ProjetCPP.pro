@@ -9,7 +9,8 @@ SOURCES += main.cpp \
     terrainnormal.cpp \
     eau.cpp \
     crevasse.cpp \
-    roche.cpp
+    roche.cpp \
+    joueur.cpp
 
 HEADERS += \
     fenetre.h \
@@ -20,4 +21,5 @@ HEADERS += \
     terrainnormal.h \
     eau.h \
     crevasse.h \
-    roche.h
+    roche.h \
+    joueur.h
