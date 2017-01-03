@@ -1,7 +1,23 @@
 QT += widgets
 
 SOURCES += main.cpp \
-    fenetre.cpp
+    fenetre.cpp \
+    obstacle.cpp \
+    arbre.cpp \
+    terrain.cpp \
+    tank.cpp \
+    terrainnormal.cpp \
+    eau.cpp \
+    crevasse.cpp \
+    roche.cpp
 
 HEADERS += \
-    fenetre.h
+    fenetre.h \
+    obstacle.h \
+    arbre.h \
+    terrain.h \
+    tank.h \
+    terrainnormal.h \
+    eau.h \
+    crevasse.h \
+    roche.h

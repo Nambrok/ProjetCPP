@@ -4,12 +4,19 @@
 #include <QApplication>
 #include <QWidget>
 #include <QPushButton>
+#include <QGraphicsView>
+#include <QGraphicsScene>
+#include <QBrush>
+#include <QColor>
+#include <QLine>
+#include <QRect>
 
-class Fenetre : public QWidget
+class Fenetre : public QGraphicsView
 {
     Q_OBJECT
 private:
     QPushButton * sortie;
+    QGraphicsScene * scene;
     int LMaxTerrain, CMaxTerrain;
 public:
     Fenetre(int L, int C);
