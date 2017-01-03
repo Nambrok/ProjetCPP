@@ -9,7 +9,9 @@
 #include <QBrush>
 #include <QColor>
 #include <QLine>
-#include <QRect>
+#include <QGraphicsRectItem>
+
+#define NMAX 25
 
 class Fenetre : public QGraphicsView
 {

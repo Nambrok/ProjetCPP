@@ -9,9 +9,12 @@ Fenetre::Fenetre(int L, int C) : QGraphicsView()
     scene = new QGraphicsScene();
     scene->setBackgroundBrush(QBrush(QColor(169, 89, 30)));
 
-    QRect rect(0, 0, LMaxTerrain, CMaxTerrain);
-    scene->addRect(rect);
-    scene->addEllipse(rect);
+    QGraphicsRectItem *rect[NMAX];
+    for(int i = 0; i<NMAX; i++){
+        rect[i] = new QGraphicsRectItem(i * (LMaxTerrain/NMAX), CMaxTerrain/NMAX, LMaxTerrain/NMAX, CMaxTerrain/NMAX);
+        rect[i]->setPos(i * (LMaxTerrain/NMAX), CMaxTerrain/NMAX);
+        scene->addItem(rect[i]);
+    }
 
     sortie = new QPushButton(this);
     sortie->setText("Quitter");
