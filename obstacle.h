@@ -1,6 +1,7 @@
 #ifndef OBSTACLE_H
 #define OBSTACLE_H
 #include <QColor>
+#include <QPixmap>
 
 class Obstacle{
 private:
@@ -8,6 +9,7 @@ private:
     int resistanceOriginal;
     void setResistanceOriginal(int resOri);
     QColor couleur;
+    QPixmap *texture;
 
 public:
     Obstacle();
@@ -17,6 +19,9 @@ public:
     int getResistanceOriginal();
     QColor getCouleur();
     void setCouleur(QColor newCouleur);
+    QPixmap getTexture();
+protected:
+    void setTexture(QPixmap *newTexture);
 };
 
 #endif // OBSTACLE_H

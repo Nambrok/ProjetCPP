@@ -9,11 +9,6 @@ Terrain::Terrain(){
             ter[i][j] = new TerrainNormal();
         }
     }
-
-    delete ter[10][10];
-    ter[10][10] = j1->getTank();
-    delete ter[0][3];
-    ter[0][3] = j2->getTank();
 }
 
 Obstacle *Terrain::getCase(int i, int j)

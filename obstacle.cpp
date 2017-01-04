@@ -36,3 +36,13 @@ void Obstacle::setCouleur(QColor newCouleur)
 {
     couleur = newCouleur;
 }
+
+QPixmap Obstacle::getTexture()
+{
+    return *texture;
+}
+
+void Obstacle::setTexture(QPixmap *newTexture)
+{
+    texture = newTexture;
+}

@@ -1,9 +1,9 @@
 #ifndef TANK_H
 #define TANK_H
-#include "obstacle.h"
 #define NBOBUS2 10
 #define NBOBUS3 5
-class Tank : public Obstacle
+
+class Tank
 {
 private:
     int canonH; //Angle du canon horizontalement de 0 à 360°
@@ -12,6 +12,8 @@ private:
     int nbObus2 = NBOBUS2;
     int nbObus3 = NBOBUS3;
     bool alive;
+    int addL;
+    int addC;
 public:
     Tank();
     bool isAlive();
@@ -20,6 +22,11 @@ public:
     bool useObus3();
     int getNbObus2() const;
     int getNbObus3() const;
+
+    int getAddL() const;
+    void setAddL(int value);
+    int getAddC() const;
+    void setAddC(int value);
 };
 
 #endif // TANK_H

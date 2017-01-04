@@ -10,11 +10,29 @@ int Tank::getNbObus3() const
     return nbObus3;
 }
 
-Tank::Tank() : Obstacle(-10)
+int Tank::getAddL() const
+{
+    return addL;
+}
+
+void Tank::setAddL(int value)
+{
+    addL = value;
+}
+
+int Tank::getAddC() const
+{
+    return addC;
+}
+
+void Tank::setAddC(int value)
+{
+    addC = value;
+}
+
+Tank::Tank()
 {
     capacite = 100;
-    setCouleur(Qt::red);
-
 }
 
 bool Tank::isAlive()
