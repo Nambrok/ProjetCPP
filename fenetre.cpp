@@ -27,9 +27,11 @@ Fenetre::Fenetre(int L, int C) : QGraphicsView()
 
 void Fenetre::chargerTerrain(Terrain ter)
 {
+    QBrush eau(Qt::blue);
     for(int i = 0; i<NMAX; i++){
         for(int j = 0; j<NMAX; j++){
             Obstacle* ob = ter.getCase(i, j);
+            scene->addRect(0, 0, 10, 10)->setBrush(eau);
         }
     }
 }
