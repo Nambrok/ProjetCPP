@@ -21,13 +21,6 @@ Fenetre::Fenetre(int L, int C) : QGraphicsView()
     QGraphicsProxyWidget *proxy = scene->addWidget(sortie);
     proxy->setPos(LMaxTerrain + ((L - LMaxTerrain)/2) - (sortie->width()/2), C*0.75);
 
-
-
-
-    qDebug() << rect->scenePos();
-    qDebug() << rect->pos();
-    //Pourquoi le carré est au milieu ? Alors que je l'initie à (0,0) et après je le bougeais même en (0,0) et il est toujours au MILIEU !!!
-
     this->setScene(scene);
 
 }
