@@ -3,13 +3,13 @@
 
 #include <QApplication>
 #include <QWidget>
-#include <QPushButton>
 #include <QGraphicsView>
 #include <QGraphicsScene>
 #include <QBrush>
 #include <QColor>
 #include <QLine>
 #include <QGraphicsRectItem>
+#include <QDebug>
 
 #define NMAX 25
 
@@ -17,7 +17,6 @@ class Fenetre : public QGraphicsView
 {
     Q_OBJECT
 private:
-    QPushButton * sortie;
     QGraphicsScene * scene;
     int LMaxTerrain, CMaxTerrain;
 public:
