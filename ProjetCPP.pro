@@ -23,3 +23,5 @@ HEADERS += \
     crevasse.h \
     roche.h \
     joueur.h
+
+FORMS +=

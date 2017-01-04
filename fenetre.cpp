@@ -6,12 +6,13 @@ Fenetre::Fenetre(int L, int C) : QGraphicsView()
     LMaxTerrain = L*0.75;
     CMaxTerrain = C-3;
 
+
     scene = new QGraphicsScene();
     scene->setBackgroundBrush(QBrush(QColor(169, 89, 30)));
 
-    QGraphicsRectItem * rect = new QGraphicsRectItem(0, 0, LMaxTerrain, CMaxTerrain);
-    rect->setPos(LMaxTerrain, CMaxTerrain);//Je comprends pas pourquoi le rectangle est au milieu et pas calé sur la gauche !!!
-    //TODO: L'interface ;)
+
+    QGraphicsRectItem * rect = new QGraphicsRectItem(0, 0, 10, 10);
+    //Pourquoi le carré est au milieu ? Alors que je l'initie à (0,0) et après je le bougeais même en (0,0) et il est toujours au MILIEU !!!
     scene->addItem(rect);
 
 
