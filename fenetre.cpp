@@ -8,11 +8,20 @@ Fenetre::Fenetre(int L, int C) : QGraphicsView()
 
     setAlignment(Qt::AlignLeft | Qt::AlignTop);
     scene = new QGraphicsScene();
-    scene->setBackgroundBrush(QBrush(QColor(169, 89, 30)));
+    QBrush background(QColor(169, 89, 30));
 
 
-    QGraphicsRectItem * rect = scene->addRect(0, 0, 100, 100);
-    rect->setPos(0, 0);
+
+    QGraphicsRectItem * rect = scene->addRect(0, 0, LMaxTerrain, CMaxTerrain);
+    rect->setBrush(background);
+
+    QPushButton * sortie = new QPushButton;
+    sortie->setText("Quitter");
+    QObject::connect(sortie, SIGNAL(clicked(bool)), qApp, SLOT(quit()));
+    QGraphicsProxyWidget *proxy = scene->addWidget(sortie);
+    proxy->setPos(LMaxTerrain + ((L - LMaxTerrain)/2) - (sortie->width()/2), C*0.75);
+
+
 
 
     qDebug() << rect->scenePos();

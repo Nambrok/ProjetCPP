@@ -5,7 +5,7 @@
 int main(int argc, char *argv[]){
     QApplication a(argc, argv);
     Arbre arbre();
-    Fenetre fen(600, 350);
+    Fenetre fen(900, 600);
     fen.show();
     return a.exec();
 }

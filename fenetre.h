@@ -8,8 +8,10 @@
 #include <QBrush>
 #include <QColor>
 #include <QLine>
+#include <QPushButton>
 #include <QGraphicsRectItem>
 #include <QDebug>
+#include <QGraphicsProxyWidget>
 
 #define NMAX 25
 
