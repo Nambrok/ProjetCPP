@@ -1,4 +1,5 @@
 #include "terrain.h"
+#include "arbre.h"
 
 Terrain::Terrain(){
     j1 = new Joueur(new Tank());
@@ -6,7 +7,7 @@ Terrain::Terrain(){
 
     for(int i = 0; i<NMAX; i++){
         for(int j = 0; j<NMAX; j++){
-            ter[i][j] = new TerrainNormal();
+            ter[i][j] = new Arbre();
         }
     }
 }

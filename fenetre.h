@@ -11,6 +11,8 @@
 #include <QPushButton>
 #include <QGraphicsRectItem>
 #include <QGraphicsProxyWidget>
+#include <QGraphicsPixmapItem>
+
 
 #include "terrain.h"
 #include "obstacle.h"

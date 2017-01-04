@@ -45,7 +45,11 @@ void Fenetre::chargerTerrain(Terrain ter)
             Obstacle* ob = ter.getCase(i, j);
             rect = new QGraphicsRectItem(Lact, Cact, LMaxTerrain/NMAX, CMaxTerrain/NMAX);
             rect->setBrush(ob->getCouleur());
-            //scene->addPixmap(ob->getTexture());
+            QGraphicsPixmapItem * pix = scene->addPixmap(ob->getTexture().scaled(LMaxTerrain/NMAX, CMaxTerrain/NMAX,Qt::KeepAspectRatio));
+            //Il faut "scale" le sprite en fonction de LMaxTerrain/NMAX et CMaxTerrain/NMAX. j'ai trouver ça mais plus rien s'affiche.
+            pix->setPos(Lact, Cact);
+
+
             scene->addItem(rect);
             Lact+= LMaxTerrain/NMAX;
         }
