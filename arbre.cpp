@@ -3,4 +3,5 @@
 Arbre::Arbre() : Obstacle(1)
 {
     //setResistance(getResistance());
+    setCouleur(QColor(91, 60, 17));
 }

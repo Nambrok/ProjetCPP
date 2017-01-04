@@ -11,8 +11,15 @@
 #include <QPushButton>
 #include <QGraphicsRectItem>
 #include <QGraphicsProxyWidget>
+
 #include "terrain.h"
 #include "obstacle.h"
+#include "arbre.h"
+#include "crevasse.h"
+#include "eau.h"
+#include "roche.h"
+#include "tank.h"
+#include "terrainnormal.h"
 
 #define NMAX 25
 

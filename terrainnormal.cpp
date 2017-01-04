@@ -2,5 +2,5 @@
 
 TerrainNormal::TerrainNormal() : Obstacle(0)
 {
-
+    setCouleur(Qt::green);
 }

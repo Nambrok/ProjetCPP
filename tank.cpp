@@ -13,6 +13,7 @@ int Tank::getNbObus3() const
 Tank::Tank() : Obstacle(-10)
 {
     capacite = 100;
+    setCouleur(Qt::red);
 
 }
 
