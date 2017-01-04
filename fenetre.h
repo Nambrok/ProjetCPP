@@ -11,6 +11,8 @@
 #include <QPushButton>
 #include <QGraphicsRectItem>
 #include <QGraphicsProxyWidget>
+#include "terrain.h"
+#include "obstacle.h"
 
 #define NMAX 25
 
@@ -22,6 +24,7 @@ private:
     int LMaxTerrain, CMaxTerrain;
 public:
     Fenetre(int L, int C);
+    void chargerTerrain(Terrain ter);
 
 signals:
 

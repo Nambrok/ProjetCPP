@@ -24,3 +24,12 @@ Fenetre::Fenetre(int L, int C) : QGraphicsView()
     this->setScene(scene);
 
 }
+
+void Fenetre::chargerTerrain(Terrain ter)
+{
+    for(int i = 0; i<NMAX; i++){
+        for(int j = 0; j<NMAX; j++){
+            Obstacle* ob = ter.getCase(i, j);
+        }
+    }
+}

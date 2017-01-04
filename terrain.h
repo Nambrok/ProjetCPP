@@ -1,6 +1,7 @@
 #ifndef TERRAIN_H
 #define TERRAIN_H
 #include "obstacle.h"
+#include "terrainnormal.h"
 #include "joueur.h"
 #include <random>
 
@@ -8,13 +9,12 @@
 class Terrain
 {
 private:
-    Obstacle ter[NMAX][NMAX];
+    Obstacle *ter[NMAX][NMAX];
     Joueur *j1;
-    int j1i, j1j;
-    int j2i, j2j;
     Joueur *j2;
 public:
     Terrain();
+    Obstacle* getCase(int i, int j);
 };
 
 #endif // TERRAIN_H
