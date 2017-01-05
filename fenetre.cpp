@@ -6,8 +6,12 @@ Fenetre::Fenetre(int L, int C) : QGraphicsView()
     //showFullScreen(); Permet le fullscreen de l'application
 
 
-    LMaxTerrain = L*0.75;
-    CMaxTerrain = C-3;
+    LMaxTerrain = L*0.80;
+    CMaxTerrain = C;
+
+    setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
+    setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
+
 
     setAlignment(Qt::AlignLeft | Qt::AlignTop);
     scene = new QGraphicsScene();
@@ -35,6 +39,7 @@ void Fenetre::chargerTerrain(Terrain ter)
     for(int i = 0; i<NMAX; i++){
         for(int j = 0; j<NMAX; j++){
             Obstacle* ob = ter.getCase(i, j);
+
            // rect = new QGraphicsRectItem(Lact, Cact, LMaxTerrain/NMAX, CMaxTerrain/NMAX);
            // rect->setBrush(ob->getCouleur());
 

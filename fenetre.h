@@ -12,6 +12,7 @@
 #include <QGraphicsRectItem>
 #include <QGraphicsProxyWidget>
 #include <QGraphicsPixmapItem>
+#include <QPoint>
 
 
 #include "terrain.h"
