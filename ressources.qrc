@@ -1,0 +1,19 @@
+<RCC>
+    <qresource prefix="/sprites">
+        <file>RessourcesProjet/arbre.jpg</file>
+        <file>RessourcesProjet/bleuBas.png</file>
+        <file>RessourcesProjet/bleuDroit.png</file>
+        <file>RessourcesProjet/bleuGauche.png</file>
+        <file>RessourcesProjet/bleuHaut.png</file>
+        <file>RessourcesProjet/crevasse.jpg</file>
+        <file>RessourcesProjet/eau.jpg</file>
+        <file>RessourcesProjet/explosion.jpg</file>
+        <file>RessourcesProjet/obus.jpg</file>
+        <file>RessourcesProjet/roche.jpg</file>
+        <file>RessourcesProjet/rougeBas.png</file>
+        <file>RessourcesProjet/rougeDroit.png</file>
+        <file>RessourcesProjet/rougeGauche.png</file>
+        <file>RessourcesProjet/rougeHaut.png</file>
+        <file>RessourcesProjet/terrainNormal.jpg</file>
+    </qresource>
+</RCC>
