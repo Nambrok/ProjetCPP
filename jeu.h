@@ -1,5 +1,5 @@
-#ifndef FENETRE_H
-#define FENETRE_H
+#ifndef JEU_H
+#define JEU_H
 
 #include <QApplication>
 #include <QWidget>
@@ -13,6 +13,8 @@
 #include <QGraphicsProxyWidget>
 #include <QGraphicsPixmapItem>
 #include <QPoint>
+#include <QLabel>
+#include <QPalette>
 
 
 #include "terrain.h"
@@ -25,25 +27,27 @@
 #include "terrainnormal.h"
 #include "joueur.h"
 
-class Fenetre : public QGraphicsView
+class Jeu : public QGraphicsView
 {
     Q_OBJECT
 private:
     QGraphicsScene * scene;
     int LMaxTerrain, CMaxTerrain;
+    Terrain ter;
     QGraphicsPixmapItem *tank1;
     QGraphicsPixmapItem *tank2;
 
+
 public:
-    Fenetre(int L, int C);
-    void chargerTerrain(Terrain ter);
+    Jeu(int L, int C);
+    void chargerTerrain();
     void afficherTankInit(Joueur *j1, Joueur *j2);
-    void moveTank1(int i, int j);
-    void moveTank2(int i, int j);
+    void moveTank1();
+    void moveTank2();
 
 signals:
 
 public slots:
 };
 
-#endif // FENETRE_H
+#endif // JEU_H

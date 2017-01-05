@@ -1,7 +1,7 @@
 QT += widgets
 
 SOURCES += main.cpp \
-    fenetre.cpp \
+    jeu.cpp \
     obstacle.cpp \
     arbre.cpp \
     terrain.cpp \
@@ -13,7 +13,7 @@ SOURCES += main.cpp \
     joueur.cpp
 
 HEADERS += \
-    fenetre.h \
+    jeu.h \
     obstacle.h \
     arbre.h \
     terrain.h \

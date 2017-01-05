@@ -1,6 +1,6 @@
-#include "fenetre.h"
+#include "jeu.h"
 
-Fenetre::Fenetre(int L, int C) : QGraphicsView()
+Jeu::Jeu(int L, int C) : QGraphicsView()
 {
     setFixedSize(L, C);
     //showFullScreen(); Permet le fullscreen de l'application
@@ -16,6 +16,7 @@ Fenetre::Fenetre(int L, int C) : QGraphicsView()
     setAlignment(Qt::AlignLeft | Qt::AlignTop);
     scene = new QGraphicsScene();
     QBrush background(QColor(169, 89, 30));
+    QPalette fondblanc(Qt::black, Qt::white);
 
 
 
@@ -26,12 +27,22 @@ Fenetre::Fenetre(int L, int C) : QGraphicsView()
     sortie->setText("Quitter");
     QObject::connect(sortie, SIGNAL(clicked(bool)), qApp, SLOT(quit()));
     QGraphicsProxyWidget *proxy = scene->addWidget(sortie);
-    proxy->setPos(LMaxTerrain + ((L - LMaxTerrain)/2) - (sortie->width()/2), C*0.75);
+    proxy->setPos(LMaxTerrain + ((L - LMaxTerrain)/2) - (sortie->width()/2), C*0.60);
+
+
+    QLabel * tour = new QLabel;
+    tour->setText("Tour :");
+    tour->setPalette(fondblanc);
+    proxy = scene->addWidget(tour);
+    proxy->setPos(LMaxTerrain + ((L - LMaxTerrain)/2) - (sortie->width()), C*0.50);
+
+
 
     this->setScene(scene);
+    chargerTerrain();
 }
 
-void Fenetre::chargerTerrain(Terrain ter)
+void Jeu::chargerTerrain()
 {
     int Lact = 0, Cact = 0;
     //QGraphicsRectItem * rect;
@@ -56,7 +67,7 @@ void Fenetre::chargerTerrain(Terrain ter)
     afficherTankInit(ter.getJ1(), ter.getJ2());
 }
 
-void Fenetre::afficherTankInit(Joueur *j1, Joueur *j2)
+void Jeu::afficherTankInit(Joueur *j1, Joueur *j2)
 {
      tank1 = scene->addPixmap(j1->getTank()->getTexture().scaled(LMaxTerrain/NMAX, CMaxTerrain/NMAX));
      tank1->setPos((LMaxTerrain/NMAX)*j1->getTank()->getAdd().x(), (CMaxTerrain/NMAX)*j1->getTank()->getAdd().y());
@@ -65,12 +76,12 @@ void Fenetre::afficherTankInit(Joueur *j1, Joueur *j2)
      tank2->setPos((LMaxTerrain/NMAX)*j2->getTank()->getAdd().x(), (CMaxTerrain/NMAX)*j2->getTank()->getAdd().y());
 }
 
-void Fenetre::moveTank1(int i, int j)
+void Jeu::moveTank1()
 {
-    tank1->setPos((LMaxTerrain/NMAX)*i, (CMaxTerrain/NMAX)*j);
+    tank1->setPos((LMaxTerrain/NMAX)*ter.getJ1()->getTank()->getAdd().x(), (CMaxTerrain/NMAX)*ter.getJ1()->getTank()->getAdd().y());
 }
 
-void Fenetre::moveTank2(int i, int j)
+void Jeu::moveTank2()
 {
-    tank2->setPos((LMaxTerrain/NMAX)*i, (CMaxTerrain/NMAX)*j);
+    tank2->setPos((LMaxTerrain/NMAX)*ter.getJ2()->getTank()->getAdd().x(), (CMaxTerrain/NMAX)*ter.getJ2()->getTank()->getAdd().y());
 }
