@@ -11,10 +11,17 @@
 #include <QPushButton>
 #include <QGraphicsRectItem>
 #include <QGraphicsProxyWidget>
+#include <QGraphicsPixmapItem>
+
+
 #include "terrain.h"
 #include "obstacle.h"
-
-#define NMAX 25
+#include "arbre.h"
+#include "crevasse.h"
+#include "eau.h"
+#include "roche.h"
+#include "tank.h"
+#include "terrainnormal.h"
 
 class Fenetre : public QGraphicsView
 {
@@ -22,6 +29,7 @@ class Fenetre : public QGraphicsView
 private:
     QGraphicsScene * scene;
     int LMaxTerrain, CMaxTerrain;
+
 public:
     Fenetre(int L, int C);
     void chargerTerrain(Terrain ter);

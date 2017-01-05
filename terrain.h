@@ -1,11 +1,18 @@
 #ifndef TERRAIN_H
 #define TERRAIN_H
 #include "obstacle.h"
+
+#include "arbre.h"
+#include "crevasse.h"
+#include "eau.h"
+#include "roche.h"
 #include "terrainnormal.h"
+
 #include "joueur.h"
+#include "tank.h"
 #include <random>
 
-#define NMAX 25
+#define NMAX 30
 class Terrain
 {
 private:
@@ -15,6 +22,8 @@ private:
 public:
     Terrain();
     Obstacle* getCase(int i, int j);
+    Joueur* getJ1();
+    Joueur* getJ2();
 };
 
 #endif // TERRAIN_H

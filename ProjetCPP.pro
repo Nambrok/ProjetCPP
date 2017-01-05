@@ -25,3 +25,6 @@ HEADERS += \
     joueur.h
 
 FORMS +=
+
+RESOURCES += \
+    ressources.qrc

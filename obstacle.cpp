@@ -26,3 +26,23 @@ int Obstacle::getResistance(){
 int Obstacle::getResistanceOriginal(){
     return resistanceOriginal;
 }
+
+QColor Obstacle::getCouleur()
+{
+    return couleur;
+}
+
+void Obstacle::setCouleur(QColor newCouleur)
+{
+    couleur = newCouleur;
+}
+
+QPixmap Obstacle::getTexture()
+{
+    return *texture;
+}
+
+void Obstacle::setTexture(QPixmap *newTexture)
+{
+    texture = newTexture;
+}
