@@ -37,7 +37,7 @@ private:
 public:
     Fenetre(int L, int C);
     void chargerTerrain(Terrain ter);
-    QGraphicsPixmapItem* afficherTankInit(Joueur *j);
+    void afficherTankInit(Joueur *j1, Joueur *j2);
     void moveTank1(int i, int j);
     void moveTank2(int i, int j);
 

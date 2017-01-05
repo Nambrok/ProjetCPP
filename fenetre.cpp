@@ -53,15 +53,16 @@ void Fenetre::chargerTerrain(Terrain ter)
         Cact += (CMaxTerrain)/NMAX;
     }
 
-    tank1 = afficherTankInit(ter.getJ1());
-    tank2 = afficherTankInit(ter.getJ2());
+    afficherTankInit(ter.getJ1(), ter.getJ2());
 }
 
-QGraphicsPixmapItem* Fenetre::afficherTankInit(Joueur *j)
+void Fenetre::afficherTankInit(Joueur *j1, Joueur *j2)
 {
-     QGraphicsPixmapItem *pix = scene->addPixmap(j->getTank()->getTexture().scaled(LMaxTerrain/NMAX, CMaxTerrain/NMAX));
-     pix->setPos((LMaxTerrain/NMAX)*j->getTank()->getAdd().x(), (CMaxTerrain/NMAX)*j->getTank()->getAdd().y());
-     return pix;
+     tank1 = scene->addPixmap(j1->getTank()->getTexture().scaled(LMaxTerrain/NMAX, CMaxTerrain/NMAX));
+     tank1->setPos((LMaxTerrain/NMAX)*j1->getTank()->getAdd().x(), (CMaxTerrain/NMAX)*j1->getTank()->getAdd().y());
+
+     tank2 = scene->addPixmap(j2->getTank()->getTexture().scaled(LMaxTerrain/NMAX, CMaxTerrain/NMAX));
+     tank2->setPos((LMaxTerrain/NMAX)*j2->getTank()->getAdd().x(), (CMaxTerrain/NMAX)*j2->getTank()->getAdd().y());
 }
 
 void Fenetre::moveTank1(int i, int j)
