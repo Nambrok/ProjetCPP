@@ -13,6 +13,9 @@ void Fenetre::setOrientation(int value)
 Fenetre::Fenetre(int L, int C) : QGraphicsView()
 {
     setFixedSize(L, C);
+    //showFullScreen(); Permet le fullscreen de l'application
+
+
     LMaxTerrain = L*0.75;
     CMaxTerrain = C-3;
 
@@ -32,7 +35,6 @@ Fenetre::Fenetre(int L, int C) : QGraphicsView()
     proxy->setPos(LMaxTerrain + ((L - LMaxTerrain)/2) - (sortie->width()/2), C*0.75);
 
     this->setScene(scene);
-
 }
 
 void Fenetre::chargerTerrain(Terrain ter)
@@ -45,9 +47,11 @@ void Fenetre::chargerTerrain(Terrain ter)
             Obstacle* ob = ter.getCase(i, j);
             rect = new QGraphicsRectItem(Lact, Cact, LMaxTerrain/NMAX, CMaxTerrain/NMAX);
             rect->setBrush(ob->getCouleur());
-            QGraphicsPixmapItem * pix = scene->addPixmap(ob->getTexture().scaled(LMaxTerrain/NMAX, CMaxTerrain/NMAX,Qt::KeepAspectRatio));
-            //Il faut "scale" le sprite en fonction de LMaxTerrain/NMAX et CMaxTerrain/NMAX. j'ai trouver ça mais plus rien s'affiche.
-            pix->setPos(Lact, Cact);
+
+            QGraphicsPixmapItem * pix = scene->addPixmap(ob->getTexture().scaled(LMaxTerrain/NMAX, CMaxTerrain/NMAX));
+            //pix->setPos(Lact, Cact);
+            pix->setPos(0, 0); //What les rectangles s'affichent au bonne endroit (enfin presque en utilisant les coordonnées (Lact, Cact) mais pas le sprite.
+            //Pourtant j'arrive maintenant à l'afficher à la bonne taille
 
 
             scene->addItem(rect);
