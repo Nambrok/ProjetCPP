@@ -1,15 +1,5 @@
 #include "fenetre.h"
 
-int Fenetre::getOrientation() const
-{
-    return orientation;
-}
-
-void Fenetre::setOrientation(int value)
-{
-    orientation = value;
-}
-
 Fenetre::Fenetre(int L, int C) : QGraphicsView()
 {
     setFixedSize(L, C);
@@ -40,7 +30,7 @@ Fenetre::Fenetre(int L, int C) : QGraphicsView()
 void Fenetre::chargerTerrain(Terrain ter)
 {
     int Lact = 0, Cact = 0;
-    QGraphicsRectItem * rect;
+    //QGraphicsRectItem * rect;
 
     for(int i = 0; i<NMAX; i++){
         for(int j = 0; j<NMAX; j++){
@@ -55,6 +45,6 @@ void Fenetre::chargerTerrain(Terrain ter)
             Lact+= LMaxTerrain/NMAX;
         }
         Lact = 0;
-        Cact += CMaxTerrain/NMAX;
+        Cact += (CMaxTerrain)/NMAX;
     }
 }

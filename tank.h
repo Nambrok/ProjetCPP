@@ -3,6 +3,8 @@
 #define NBOBUS2 10
 #define NBOBUS3 5
 
+#include <QPixmap>
+
 class Tank
 {
 private:
@@ -14,8 +16,11 @@ private:
     bool alive;
     int addL;
     int addC;
+    int orientation;
+    QPixmap * texture;
 public:
     Tank();
+    Tank(QPixmap* newTexture);
     bool isAlive();
     bool useObus1();
     bool useObus2();
@@ -27,6 +32,11 @@ public:
     void setAddL(int value);
     int getAddC() const;
     void setAddC(int value);
+    int getOrientation() const;
+    void setOrientation(int value);
+
+    QPixmap getTexture();
+    void setTexture(QPixmap* newTexture);
 };
 
 #endif // TANK_H

@@ -22,6 +22,8 @@ private:
 public:
     Terrain();
     Obstacle* getCase(int i, int j);
+    Joueur* getJ1();
+    Joueur* getJ2();
 };
 
 #endif // TERRAIN_H

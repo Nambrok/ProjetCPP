@@ -30,6 +30,16 @@ void Tank::setAddC(int value)
     addC = value;
 }
 
+int Tank::getOrientation() const
+{
+    return orientation;
+}
+
+void Tank::setOrientation(int value)
+{
+    orientation = value;
+}
+
 Tank::Tank()
 {
     capacite = 100;

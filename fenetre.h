@@ -29,13 +29,10 @@ class Fenetre : public QGraphicsView
 private:
     QGraphicsScene * scene;
     int LMaxTerrain, CMaxTerrain;
-    int orientation;
+
 public:
     Fenetre(int L, int C);
     void chargerTerrain(Terrain ter);
-
-    int getOrientation() const;
-    void setOrientation(int value);
 
 signals:
 
