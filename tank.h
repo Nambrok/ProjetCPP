@@ -5,6 +5,7 @@
 
 #include <QPixmap>
 #include <QPoint>
+#include <random>
 
 class Tank
 {
@@ -16,7 +17,7 @@ private:
     int nbObus3 = NBOBUS3;
     bool alive;
     QPoint add;
-    int orientation;
+    int orientation; // orientation, 0 haut, 1 gauche, 2 bas, 3 droite
     QPixmap * textureHaut;
     QPixmap * textureBas;
     QPixmap * textureGauche;

@@ -23,6 +23,7 @@
 #include "roche.h"
 #include "tank.h"
 #include "terrainnormal.h"
+#include "joueur.h"
 
 class Fenetre : public QGraphicsView
 {
@@ -30,10 +31,15 @@ class Fenetre : public QGraphicsView
 private:
     QGraphicsScene * scene;
     int LMaxTerrain, CMaxTerrain;
+    QGraphicsPixmapItem *tank1;
+    QGraphicsPixmapItem *tank2;
 
 public:
     Fenetre(int L, int C);
     void chargerTerrain(Terrain ter);
+    QGraphicsPixmapItem* afficherTankInit(Joueur *j);
+    void moveTank1(int i, int j);
+    void moveTank2(int i, int j);
 
 signals:
 

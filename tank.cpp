@@ -20,6 +20,27 @@ void Tank::setOrientation(int value)
     orientation = value;
 }
 
+QPixmap Tank::getTexture()
+{
+    switch (getOrientation()) {
+    case 0:
+        return *textureHaut;
+        break;
+    case 1:
+        return *textureGauche;
+        break;
+    case 2:
+        return *textureBas;
+        break;
+    case 3:
+        return *textureDroite;
+        break;
+    default:
+        return *textureHaut;
+        break;
+    }
+}
+
 void Tank::setTextureGauche(QPixmap *newTexture)
 {
     this->textureGauche = newTexture;
@@ -53,6 +74,7 @@ void Tank::setAdd(const QPoint &value)
 Tank::Tank()
 {
     capacite = 100;
+    setOrientation(rand()%4);
 }
 
 bool Tank::isAlive()

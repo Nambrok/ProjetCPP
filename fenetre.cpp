@@ -52,4 +52,24 @@ void Fenetre::chargerTerrain(Terrain ter)
         Lact = 0;
         Cact += (CMaxTerrain)/NMAX;
     }
+
+    tank1 = afficherTankInit(ter.getJ1());
+    tank2 = afficherTankInit(ter.getJ2());
+}
+
+QGraphicsPixmapItem* Fenetre::afficherTankInit(Joueur *j)
+{
+     QGraphicsPixmapItem *pix = scene->addPixmap(j->getTank()->getTexture().scaled(LMaxTerrain/NMAX, CMaxTerrain/NMAX));
+     pix->setPos((LMaxTerrain/NMAX)*j->getTank()->getAdd().x(), (CMaxTerrain/NMAX)*j->getTank()->getAdd().y());
+     return pix;
+}
+
+void Fenetre::moveTank1(int i, int j)
+{
+    tank1->setPos((LMaxTerrain/NMAX)*i, (CMaxTerrain/NMAX)*j);
+}
+
+void Fenetre::moveTank2(int i, int j)
+{
+    tank2->setPos((LMaxTerrain/NMAX)*i, (CMaxTerrain/NMAX)*j);
 }

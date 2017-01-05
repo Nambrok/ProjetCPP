@@ -18,24 +18,22 @@ Terrain::Terrain(){
     j2->getTank()->setAdd(QPoint(10, 10));
     for(int i = 0; i<NMAX; i++){
         for(int j = 0; j<NMAX; j++){
-            switch (rand() % 5) {
-             case 0:
-                ter[i][j] = new Arbre();
-                break;
-             case 1:
-                ter[i][j] = new Crevasse();
-                break;
-              case 2:
-                ter[i][j] = new Eau();
-                break;
-              case 3:
-                ter[i][j] = new Roche();
-                break;
-              case 4:
-                ter[i][j] = new TerrainNormal();
-                break;
-              default:
-                break;
+            switch (rand() % 15) {
+                         case 0:
+                            ter[i][j] = new Arbre();
+                            break;
+                         case 1:
+                            ter[i][j] = new Crevasse();
+                            break;
+                          case 2:
+                            ter[i][j] = new Eau();
+                            break;
+                          case 3:
+                            ter[i][j] = new Roche();
+                            break;
+                          default:
+                            ter[i][j] = new TerrainNormal();
+                            break;
             }
         }
     }
