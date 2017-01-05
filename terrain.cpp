@@ -45,3 +45,13 @@ Obstacle *Terrain::getCase(int i, int j)
 {
     return ter[i][j];
 }
+
+Joueur *Terrain::getJ1()
+{
+    return j1;
+}
+
+Joueur *Terrain::getJ2()
+{
+    return j2;
+}
