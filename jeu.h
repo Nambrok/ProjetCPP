@@ -1,6 +1,9 @@
 #ifndef JEU_H
 #define JEU_H
 
+#define J1 0
+#define J2 1
+
 #include <QApplication>
 #include <QWidget>
 #include <QGraphicsView>
@@ -15,6 +18,7 @@
 #include <QPoint>
 #include <QLabel>
 #include <QPalette>
+#include <QLCDNumber>
 
 #include <QKeyEvent>
 
@@ -33,6 +37,7 @@ class Jeu : public QGraphicsView
 {
     Q_OBJECT
 private:
+    int tour;
     QGraphicsScene * scene;
     int LMaxTerrain, CMaxTerrain;
     Terrain ter;
@@ -40,15 +45,17 @@ private:
     QGraphicsPixmapItem *tank2;
     void keyPressEvent(QKeyEvent *event);
 
-
 public:
     Jeu(int L, int C);
     void chargerTerrain();
     void afficherTankInit(Joueur *j1, Joueur *j2);
     void moveTank1();
     void moveTank2();
+    int getTour();
+    void setTour(int newTour);
 
 signals:
+void changementTour(int tour);
 
 public slots:
     void changerTour();

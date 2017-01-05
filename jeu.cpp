@@ -1,5 +1,6 @@
 #include "jeu.h"
 
+
 void Jeu::keyPressEvent(QKeyEvent *event)
 {
     if(event->key() == Qt::Key_Left){
@@ -15,6 +16,7 @@ Jeu::Jeu(int L, int C) : QGraphicsView()
 
     LMaxTerrain = L*0.80;
     CMaxTerrain = C;
+    setTour(0);
 
     setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
     setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
@@ -47,6 +49,14 @@ Jeu::Jeu(int L, int C) : QGraphicsView()
     tour->setPalette(fondblanc);
     proxy = scene->addWidget(tour);
     proxy->setPos(LMaxTerrain + ((L - LMaxTerrain)/2) - (sortie->width()), C*0.50);
+
+    QLCDNumber * nbTour = new QLCDNumber;
+    nbTour->setSegmentStyle(QLCDNumber::Flat);
+    QObject::connect(this, SIGNAL(changementTour(int)), nbTour, SLOT(display(int)));
+    proxy = scene->addWidget(nbTour);
+    proxy->setPos(LMaxTerrain + ((L - LMaxTerrain)/2) - (nbTour->width()/2), C*0.50);;
+
+
 
     this->setScene(scene);
     chargerTerrain();
@@ -96,7 +106,18 @@ void Jeu::moveTank2()
     tank2->setPos((LMaxTerrain/NMAX)*ter.getJ2()->getTank()->getAdd().x(), (CMaxTerrain/NMAX)*ter.getJ2()->getTank()->getAdd().y());
 }
 
+int Jeu::getTour()
+{
+    return tour%2;
+}
+
+void Jeu::setTour(int newTour)
+{
+    this->tour = newTour;
+}
+
 void Jeu::changerTour()
 {
-
+    tour += 1;
+    emit changementTour(tour);
 }
