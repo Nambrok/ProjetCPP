@@ -45,16 +45,16 @@ void Fenetre::chargerTerrain(Terrain ter)
     for(int i = 0; i<NMAX; i++){
         for(int j = 0; j<NMAX; j++){
             Obstacle* ob = ter.getCase(i, j);
-            rect = new QGraphicsRectItem(Lact, Cact, LMaxTerrain/NMAX, CMaxTerrain/NMAX);
-            rect->setBrush(ob->getCouleur());
+           // rect = new QGraphicsRectItem(Lact, Cact, LMaxTerrain/NMAX, CMaxTerrain/NMAX);
+           // rect->setBrush(ob->getCouleur());
 
             QGraphicsPixmapItem * pix = scene->addPixmap(ob->getTexture().scaled(LMaxTerrain/NMAX, CMaxTerrain/NMAX));
-            //pix->setPos(Lact, Cact);
-            pix->setPos(0, 0); //What les rectangles s'affichent au bonne endroit (enfin presque en utilisant les coordonnées (Lact, Cact) mais pas le sprite.
+            pix->setPos(Lact, Cact);
+            //pix->setPos(0, 0); //What les rectangles s'affichent au bonne endroit (enfin presque en utilisant les coordonnées (Lact, Cact) mais pas le sprite.
             //Pourtant j'arrive maintenant à l'afficher à la bonne taille
 
 
-            scene->addItem(rect);
+            //scene->addItem(rect);
             Lact+= LMaxTerrain/NMAX;
         }
         Lact = 0;
