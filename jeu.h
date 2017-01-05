@@ -16,6 +16,8 @@
 #include <QLabel>
 #include <QPalette>
 
+#include <QKeyEvent>
+
 
 #include "terrain.h"
 #include "obstacle.h"
@@ -36,6 +38,7 @@ private:
     Terrain ter;
     QGraphicsPixmapItem *tank1;
     QGraphicsPixmapItem *tank2;
+    void keyPressEvent(QKeyEvent *event);
 
 
 public:
@@ -48,6 +51,7 @@ public:
 signals:
 
 public slots:
+    void changerTour();
 };
 
 #endif // JEU_H

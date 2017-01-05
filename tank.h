@@ -41,6 +41,8 @@ public:
     void setTextureBas(QPixmap* newTexture);
     QPoint getAdd() const;
     void setAdd(const QPoint &value);
+
+    void moveBy(int dx, int dy);
 };
 
 #endif // TANK_H

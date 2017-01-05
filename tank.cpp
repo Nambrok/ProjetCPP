@@ -71,6 +71,11 @@ void Tank::setAdd(const QPoint &value)
     add = value;
 }
 
+void Tank::moveBy(int dx, int dy)
+{
+    add += QPoint(dx, dy);
+}
+
 Tank::Tank()
 {
     capacite = 100;

@@ -1,5 +1,12 @@
 #include "jeu.h"
 
+void Jeu::keyPressEvent(QKeyEvent *event)
+{
+    if(event->key() == Qt::Key_Left){
+
+    }
+}
+
 Jeu::Jeu(int L, int C) : QGraphicsView()
 {
     setFixedSize(L, C);
@@ -29,14 +36,17 @@ Jeu::Jeu(int L, int C) : QGraphicsView()
     QGraphicsProxyWidget *proxy = scene->addWidget(sortie);
     proxy->setPos(LMaxTerrain + ((L - LMaxTerrain)/2) - (sortie->width()/2), C*0.60);
 
+    QPushButton * change = new QPushButton;
+    change->setText("Changer de tour");
+    QObject::connect(change, SIGNAL(clicked(bool)), this, SLOT(changerTour()));
+    proxy = scene->addWidget(change);
+    proxy->setPos(LMaxTerrain + ((L - LMaxTerrain)/2) - (change->width()/2), C*0.60-sortie->height());
 
     QLabel * tour = new QLabel;
     tour->setText("Tour :");
     tour->setPalette(fondblanc);
     proxy = scene->addWidget(tour);
     proxy->setPos(LMaxTerrain + ((L - LMaxTerrain)/2) - (sortie->width()), C*0.50);
-
-
 
     this->setScene(scene);
     chargerTerrain();
@@ -84,4 +94,9 @@ void Jeu::moveTank1()
 void Jeu::moveTank2()
 {
     tank2->setPos((LMaxTerrain/NMAX)*ter.getJ2()->getTank()->getAdd().x(), (CMaxTerrain/NMAX)*ter.getJ2()->getTank()->getAdd().y());
+}
+
+void Jeu::changerTour()
+{
+
 }
