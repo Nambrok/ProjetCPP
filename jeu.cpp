@@ -3,9 +3,52 @@
 
 void Jeu::keyPressEvent(QKeyEvent *event)
 {
+    int dx, dy, ori;
     if(event->key() == Qt::Key_Left){
-
+        dx = -1; dy = 0;
+        ori = 1;
     }
+    else if(event->key() == Qt::Key_Right){
+        dx = 1; dy = 0;
+        ori = 3;
+    }
+    else if(event->key() == Qt::Key_Up){
+        dx = 0; dy = -1;
+        ori = 0;
+    }
+    else if(event->key() == Qt::Key_Down){
+        tankActuel->moveBy(0, 1);
+        dx = 0; dy = 1;
+        ori = 2;
+    }
+
+    if(tankActuel->capaciteRestante()){
+        switch(ter.getCase(tankActuel->getAdd().x()+dx, tankActuel->getAdd().y()+dy)->getIdentifiant()){
+        case 0:
+            tankActuel->setOrientation(ori);
+            break;
+        case 1:
+            tankActuel->moveBy(dx, dy);
+            tankActuel->enleverCapacite(2);
+            tankActuel->setOrientation(ori);
+            break;
+        case 2:
+            tankActuel->moveBy(dx, dy);
+            tankActuel->makeZeroCapacite();
+            tankActuel->setOrientation(ori);
+            break;
+        case 3:
+            tankActuel->setOrientation(ori);
+            break;
+        case 4:
+            tankActuel->moveBy(dx, dy);
+            tankActuel->setOrientation(ori);
+            tankActuel->enleverCapacite();
+            break;
+        }
+        mettreAJourTank();
+    }
+
 }
 
 Jeu::Jeu(int L, int C) : QGraphicsView()
@@ -52,6 +95,7 @@ Jeu::Jeu(int L, int C) : QGraphicsView()
 
     QLCDNumber * nbTour = new QLCDNumber;
     nbTour->setSegmentStyle(QLCDNumber::Flat);
+    nbTour->setPalette(fondblanc);
     QObject::connect(this, SIGNAL(changementTour(int)), nbTour, SLOT(display(int)));
     proxy = scene->addWidget(nbTour);
     proxy->setPos(LMaxTerrain + ((L - LMaxTerrain)/2) - (nbTour->width()/2), C*0.50);;
@@ -94,15 +138,16 @@ void Jeu::afficherTankInit(Joueur *j1, Joueur *j2)
 
      tank2 = scene->addPixmap(j2->getTank()->getTexture().scaled(LMaxTerrain/NMAX, CMaxTerrain/NMAX));
      tank2->setPos((LMaxTerrain/NMAX)*j2->getTank()->getAdd().x(), (CMaxTerrain/NMAX)*j2->getTank()->getAdd().y());
+
+     tankActuel = j1->getTank();
+     imgTankActuel = tank1;
 }
 
-void Jeu::moveTank1()
+void Jeu::mettreAJourTank()
 {
+    tank1->setPixmap(ter.getJ1()->getTank()->getTexture().scaled(LMaxTerrain/NMAX, CMaxTerrain/NMAX));
+    tank1->setPixmap(ter.getJ2()->getTank()->getTexture().scaled(LMaxTerrain/NMAX, CMaxTerrain/NMAX));
     tank1->setPos((LMaxTerrain/NMAX)*ter.getJ1()->getTank()->getAdd().x(), (CMaxTerrain/NMAX)*ter.getJ1()->getTank()->getAdd().y());
-}
-
-void Jeu::moveTank2()
-{
     tank2->setPos((LMaxTerrain/NMAX)*ter.getJ2()->getTank()->getAdd().x(), (CMaxTerrain/NMAX)*ter.getJ2()->getTank()->getAdd().y());
 }
 
@@ -119,5 +164,13 @@ void Jeu::setTour(int newTour)
 void Jeu::changerTour()
 {
     tour += 1;
+    if(getTour() == J1){
+        tankActuel = ter.getJ1()->getTank();
+        imgTankActuel = tank1;
+    }
+    else if(getTour() == J2){
+        tankActuel = ter.getJ2()->getTank();
+        imgTankActuel = tank2;
+    }
     emit changementTour(tour);
 }

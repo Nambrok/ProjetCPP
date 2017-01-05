@@ -5,9 +5,10 @@ Obstacle::Obstacle(){
     resistanceOriginal = 0;
 }
 
-Obstacle::Obstacle(int resOri){
+Obstacle::Obstacle(int resOri, int newIdentifiant){
     resistanceOriginal = resOri;
     resistance = resistanceOriginal;
+    identifiant = newIdentifiant;
 }
 
 void Obstacle::setResistanceOriginal(int resOri){
@@ -15,8 +16,13 @@ void Obstacle::setResistanceOriginal(int resOri){
     resistance = resistanceOriginal;
 }
 
+int Obstacle::getIdentifiant() const
+{
+    return identifiant;
+}
+
 void Obstacle::setResistance(int newRes){
- resistance = newRes;
+    resistance = newRes;
 }
 
 int Obstacle::getResistance(){

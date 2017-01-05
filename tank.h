@@ -34,6 +34,11 @@ public:
     int getOrientation() const;
     void setOrientation(int value);
 
+    bool enleverCapacite();
+    bool enleverCapacite(int cx);
+    void makeZeroCapacite();
+    bool capaciteRestante();
+
     QPixmap getTexture();
     void setTextureGauche(QPixmap* newTexture);
     void setTextureDroite(QPixmap* newTexture);

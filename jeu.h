@@ -43,19 +43,21 @@ private:
     Terrain ter;
     QGraphicsPixmapItem *tank1;
     QGraphicsPixmapItem *tank2;
+    Tank *tankActuel;
+    QGraphicsPixmapItem *imgTankActuel;
     void keyPressEvent(QKeyEvent *event);
 
 public:
     Jeu(int L, int C);
     void chargerTerrain();
     void afficherTankInit(Joueur *j1, Joueur *j2);
-    void moveTank1();
-    void moveTank2();
+    void mettreAJourTank();
     int getTour();
     void setTour(int newTour);
+    void choisirTankActuel();
 
 signals:
-void changementTour(int tour);
+    void changementTour(int tour);
 
 public slots:
     void changerTour();

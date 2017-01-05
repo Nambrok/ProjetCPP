@@ -10,16 +10,19 @@ private:
     void setResistanceOriginal(int resOri);
     QColor couleur;
     QPixmap *texture;
+    int identifiant;
 
 public:
     Obstacle();
-    Obstacle(int resOri);
+    Obstacle(int resOri, int newIdentifiant);
     void setResistance(int newRes);
     int getResistance();
     int getResistanceOriginal();
     QColor getCouleur();
     void setCouleur(QColor newCouleur);
     QPixmap getTexture();
+    int getIdentifiant() const;
+
 protected:
     void setTexture(QPixmap *newTexture);
 };

@@ -20,6 +20,37 @@ void Tank::setOrientation(int value)
     orientation = value;
 }
 
+bool Tank::enleverCapacite()
+{
+    return enleverCapacite(1);
+}
+
+bool Tank::enleverCapacite(int cx)
+{
+    if(capacite > 0){
+        capacite -= cx;
+        return true;
+    }
+    else{
+        return false;
+    }
+}
+
+void Tank::makeZeroCapacite()
+{
+    capacite = 0;
+}
+
+bool Tank::capaciteRestante()
+{
+    if(capacite>0){
+        return true;
+    }
+    else{
+        return false;
+    }
+}
+
 QPixmap Tank::getTexture()
 {
     switch (getOrientation()) {
