@@ -10,26 +10,6 @@ int Tank::getNbObus3() const
     return nbObus3;
 }
 
-int Tank::getAddL() const
-{
-    return addL;
-}
-
-void Tank::setAddL(int value)
-{
-    addL = value;
-}
-
-int Tank::getAddC() const
-{
-    return addC;
-}
-
-void Tank::setAddC(int value)
-{
-    addC = value;
-}
-
 int Tank::getOrientation() const
 {
     return orientation;
@@ -38,6 +18,36 @@ int Tank::getOrientation() const
 void Tank::setOrientation(int value)
 {
     orientation = value;
+}
+
+void Tank::setTextureGauche(QPixmap *newTexture)
+{
+    this->textureGauche = newTexture;
+}
+
+void Tank::setTextureDroite(QPixmap *newTexture)
+{
+    this->textureDroite = newTexture;
+}
+
+void Tank::setTextureHaut(QPixmap *newTexture)
+{
+    this->textureHaut = newTexture;
+}
+
+void Tank::setTextureBas(QPixmap *newTexture)
+{
+    this->textureBas = newTexture;
+}
+
+QPoint Tank::getAdd() const
+{
+    return add;
+}
+
+void Tank::setAdd(const QPoint &value)
+{
+    add = value;
 }
 
 Tank::Tank()

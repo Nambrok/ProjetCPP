@@ -4,6 +4,7 @@
 #define NBOBUS3 5
 
 #include <QPixmap>
+#include <QPoint>
 
 class Tank
 {
@@ -14,13 +15,14 @@ private:
     int nbObus2 = NBOBUS2;
     int nbObus3 = NBOBUS3;
     bool alive;
-    int addL;
-    int addC;
+    QPoint add;
     int orientation;
-    QPixmap * texture;
+    QPixmap * textureHaut;
+    QPixmap * textureBas;
+    QPixmap * textureGauche;
+    QPixmap * textureDroite;
 public:
     Tank();
-    Tank(QPixmap* newTexture);
     bool isAlive();
     bool useObus1();
     bool useObus2();
@@ -28,15 +30,16 @@ public:
     int getNbObus2() const;
     int getNbObus3() const;
 
-    int getAddL() const;
-    void setAddL(int value);
-    int getAddC() const;
-    void setAddC(int value);
     int getOrientation() const;
     void setOrientation(int value);
 
     QPixmap getTexture();
-    void setTexture(QPixmap* newTexture);
+    void setTextureGauche(QPixmap* newTexture);
+    void setTextureDroite(QPixmap* newTexture);
+    void setTextureHaut(QPixmap* newTexture);
+    void setTextureBas(QPixmap* newTexture);
+    QPoint getAdd() const;
+    void setAdd(const QPoint &value);
 };
 
 #endif // TANK_H

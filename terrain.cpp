@@ -4,6 +4,18 @@ Terrain::Terrain(){
     j1 = new Joueur(new Tank());
     j2 = new Joueur(new Tank());
 
+    j1->getTank()->setTextureBas(new QPixmap(":/sprites/RessourcesProjet/bleuBas.png"));
+    j1->getTank()->setTextureDroite(new QPixmap(":/sprites/RessourcesProjet/bleuDroit.png"));
+    j1->getTank()->setTextureGauche(new QPixmap(":/sprites/RessourcesProjet/bleuGauche.png"));
+    j1->getTank()->setTextureHaut(new QPixmap(":/sprites/RessourcesProjet/bleuHaut.png"));
+
+    j2->getTank()->setTextureBas(new QPixmap(":/sprites/RessourcesProjet/rougeBas.png"));
+    j2->getTank()->setTextureDroite(new QPixmap(":/sprites/RessourcesProjet/rougeDroit.png"));
+    j2->getTank()->setTextureGauche(new QPixmap(":/sprites/RessourcesProjet/rougeGauche.png"));
+    j2->getTank()->setTextureHaut(new QPixmap(":/sprites/RessourcesProjet/rougeHaut.png"));
+
+    j1->getTank()->setAdd(QPoint(0,0));
+    j2->getTank()->setAdd(QPoint(10, 10));
     for(int i = 0; i<NMAX; i++){
         for(int j = 0; j<NMAX; j++){
             switch (rand() % 5) {
