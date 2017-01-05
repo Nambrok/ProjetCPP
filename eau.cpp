@@ -3,4 +3,5 @@
 Eau::Eau() : Obstacle(RMAX)
 {
     setCouleur(Qt::blue);
+    setTexture(new QPixmap(":/sprites/RessourcesProjet/eau.jpg"));
 }

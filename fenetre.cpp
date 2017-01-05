@@ -50,9 +50,6 @@ void Fenetre::chargerTerrain(Terrain ter)
 
             QGraphicsPixmapItem * pix = scene->addPixmap(ob->getTexture().scaled(LMaxTerrain/NMAX, CMaxTerrain/NMAX));
             pix->setPos(Lact, Cact);
-            //pix->setPos(0, 0); //What les rectangles s'affichent au bonne endroit (enfin presque en utilisant les coordonnées (Lact, Cact) mais pas le sprite.
-            //Pourtant j'arrive maintenant à l'afficher à la bonne taille
-
 
             //scene->addItem(rect);
             Lact+= LMaxTerrain/NMAX;

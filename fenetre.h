@@ -23,8 +23,6 @@
 #include "tank.h"
 #include "terrainnormal.h"
 
-#define NMAX 25
-
 class Fenetre : public QGraphicsView
 {
     Q_OBJECT
