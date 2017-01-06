@@ -30,34 +30,34 @@ void Jeu::keyPressEvent(QKeyEvent *event)
         switch(ter.getCase(tankActuel->getAdd().x()+dx, tankActuel->getAdd().y()+dy)->getIdentifiant()){
         case 0:
             tankActuel->setOrientation(ori);
-            QDebug() << "Arbre";
-            QDebug() << getTour();
+            qDebug() << "Arbre";
+            qDebug() << getTour();
             break;
         case 1:
             tankActuel->moveBy(dx, dy);
             tankActuel->enleverCapacite(2);
             tankActuel->setOrientation(ori);
-            QDebug() << "Crevasse";
-            QDebug() << getTour();
+            qDebug() << "Crevasse";
+            qDebug() << getTour();
             break;
         case 2:
             tankActuel->moveBy(dx, dy);
             tankActuel->makeZeroCapacite();
             tankActuel->setOrientation(ori);
-            QDebug() << "Eau";
-            QDebug() << getTour();
+            qDebug() << "Eau";
+            qDebug() << getTour();
             break;
         case 3:
             tankActuel->setOrientation(ori);
-            QDebug() << "Roche";
-            QDebug() << getTour();
+            qDebug() << "Roche";
+            qDebug() << getTour();
             break;
         case 4:
             tankActuel->moveBy(dx, dy);
             tankActuel->setOrientation(ori);
             tankActuel->enleverCapacite();
-            QDebug() << "TerrainNormal";
-            QDebug() << getTour();
+            qDebug() << "TerrainNormal";
+            qDebug() << getTour();
             break;
         }
         mettreAJourTank();
