@@ -19,6 +19,7 @@
 #include <QLabel>
 #include <QPalette>
 #include <QLCDNumber>
+#include <QSlider>
 
 #include <QKeyEvent>
 
@@ -63,6 +64,7 @@ signals:
 
 public slots:
     void changerTour();
+    void changerHorizonTankActuel(int newH);
 };
 
 #endif // JEU_H

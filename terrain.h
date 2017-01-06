@@ -11,6 +11,7 @@
 #include "joueur.h"
 #include "tank.h"
 #include <random>
+#include <time.h>
 
 #define NMAX 30
 class Terrain

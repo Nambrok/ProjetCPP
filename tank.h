@@ -10,7 +10,7 @@
 class Tank
 {
 private:
-    int canonH; //Angle du canon horizontalement de 0 à 360°
+    int horizon; //Angle du canon horizontalement de 0 à 360°
     int angleDeTir; //0 à 90°
     int capacite; //capacité de déplacement restant au tank initialisé à L/10
     int nbObus2 = NBOBUS2;
@@ -49,6 +49,8 @@ public:
     void setAdd(const QPoint &value);
 
     void moveBy(int dx, int dy);
+    int getHorizon() const;
+    void setHorizon(int value);
 };
 
 #endif // TANK_H

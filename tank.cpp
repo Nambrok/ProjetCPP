@@ -112,10 +112,21 @@ void Tank::moveBy(int dx, int dy)
     add += QPoint(dx, dy);
 }
 
+int Tank::getHorizon() const
+{
+    return horizon;
+}
+
+void Tank::setHorizon(int value)
+{
+    horizon = value;
+}
+
 Tank::Tank()
 {
     capacite = 100;
     setOrientation(rand()%4);
+    setHorizon(0);
 }
 
 bool Tank::isAlive()

@@ -116,6 +116,15 @@ Jeu::Jeu(int L, int C) : QGraphicsView()
     proxy = scene->addWidget(nbTour);
     proxy->setPos(LMaxTerrain + ((L - LMaxTerrain)/2) - (nbTour->width()/2), C*0.50);;
 
+    QSlider * slideHorizon = new QSlider(Qt::Horizontal);
+    slideHorizon->setPalette(fondblanc);
+    slideHorizon->setRange(0, 360);
+    QObject::connect(slideHorizon, SIGNAL(sliderMoved(int)), this, SLOT(changerHorizonTankActuel(int)));
+    proxy = scene->addWidget(slideHorizon);
+    proxy->setPos(LMaxTerrain + ((L - LMaxTerrain)/2) - (slideHorizon->width()/2), C*0.50+nbTour->height());
+    proxy->setGeometry(QRect(LMaxTerrain, C*0.50+nbTour->height(), L - LMaxTerrain, 10));
+
+
 
 
     this->setScene(scene);
@@ -190,5 +199,10 @@ void Jeu::changerTour()
     }
     tankActuel->setCapacite(NMAX/10);
     emit changementTour(tour);
+}
+
+void Jeu::changerHorizonTankActuel(int newH)
+{
+    tankActuel->setHorizon(newH);
 }
 
