@@ -51,6 +51,11 @@ bool Tank::capaciteRestante()
     }
 }
 
+void Tank::setCapacite(int newCap)
+{
+    this->capacite = newCap;
+}
+
 QPixmap Tank::getTexture()
 {
     switch (getOrientation()) {

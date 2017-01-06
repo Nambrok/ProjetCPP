@@ -38,6 +38,7 @@ public:
     bool enleverCapacite(int cx);
     void makeZeroCapacite();
     bool capaciteRestante();
+    void setCapacite(int newCap);
 
     QPixmap getTexture();
     void setTextureGauche(QPixmap* newTexture);

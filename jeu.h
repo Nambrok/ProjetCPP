@@ -33,6 +33,8 @@
 #include "terrainnormal.h"
 #include "joueur.h"
 
+#include <QDebug>
+
 class Jeu : public QGraphicsView
 {
     Q_OBJECT

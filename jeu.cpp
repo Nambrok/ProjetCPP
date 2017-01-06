@@ -4,49 +4,65 @@
 void Jeu::keyPressEvent(QKeyEvent *event)
 {
     int dx, dy, ori;
+    bool deplacement = false;
     if(event->key() == Qt::Key_Left){
         dx = -1; dy = 0;
         ori = 1;
+        deplacement = true;
     }
     else if(event->key() == Qt::Key_Right){
         dx = 1; dy = 0;
         ori = 3;
+        deplacement = true;
     }
     else if(event->key() == Qt::Key_Up){
         dx = 0; dy = -1;
         ori = 0;
+        deplacement = true;
     }
     else if(event->key() == Qt::Key_Down){
-        tankActuel->moveBy(0, 1);
         dx = 0; dy = 1;
         ori = 2;
+        deplacement = true;
     }
-
+    if(deplacement){
     if(tankActuel->capaciteRestante()){
         switch(ter.getCase(tankActuel->getAdd().x()+dx, tankActuel->getAdd().y()+dy)->getIdentifiant()){
         case 0:
             tankActuel->setOrientation(ori);
+            QDebug() << "Arbre";
+            QDebug() << getTour();
             break;
         case 1:
             tankActuel->moveBy(dx, dy);
             tankActuel->enleverCapacite(2);
             tankActuel->setOrientation(ori);
+            QDebug() << "Crevasse";
+            QDebug() << getTour();
             break;
         case 2:
             tankActuel->moveBy(dx, dy);
             tankActuel->makeZeroCapacite();
             tankActuel->setOrientation(ori);
+            QDebug() << "Eau";
+            QDebug() << getTour();
             break;
         case 3:
             tankActuel->setOrientation(ori);
+            QDebug() << "Roche";
+            QDebug() << getTour();
             break;
         case 4:
             tankActuel->moveBy(dx, dy);
             tankActuel->setOrientation(ori);
             tankActuel->enleverCapacite();
+            QDebug() << "TerrainNormal";
+            QDebug() << getTour();
             break;
         }
         mettreAJourTank();
+    }
+    deplacement = false;
     }
 
 }
@@ -172,5 +188,7 @@ void Jeu::changerTour()
         tankActuel = ter.getJ2()->getTank();
         imgTankActuel = tank2;
     }
+    tankActuel->setCapacite(NMAX/10);
     emit changementTour(tour);
 }
+
