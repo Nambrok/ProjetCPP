@@ -127,8 +127,8 @@ void Jeu::chargerTerrain()
     int Lact = 0, Cact = 0;
     //QGraphicsRectItem * rect;
 
-    for(int i = 0; i<NMAX; i++){
-        for(int j = 0; j<NMAX; j++){
+    for(int j = 0; j<NMAX; j++){
+        for(int i = 0; i<NMAX; i++){
             Obstacle* ob = ter.getCase(i, j);
 
            // rect = new QGraphicsRectItem(Lact, Cact, LMaxTerrain/NMAX, CMaxTerrain/NMAX);
