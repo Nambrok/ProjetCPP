@@ -7,14 +7,14 @@
 class Projectile
 {
 private:
-    QPointF pointImpact;
+    QPoint pointImpact;
     int tailleImpact;
     QPixmap* texture;
 
 public:
-    Projectile(QPointF point, int direction, int puissance);
+    Projectile(QPoint point, int direction, int puissance);
 
-    QPointF getPointImpact() const;
+    QPoint getPointImpact() const;
     int getTailleImpact();
     void setTailleImpact(int value);
     QPixmap *getTexture() const;

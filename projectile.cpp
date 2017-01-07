@@ -1,6 +1,6 @@
 #include "projectile.h"
 
-QPointF Projectile::getPointImpact() const
+QPoint Projectile::getPointImpact() const
 {
     return pointImpact;
 }
@@ -30,10 +30,10 @@ Projectile::~Projectile()
     delete texture;
 }
 
-Projectile::Projectile(QPointF point, int direction, int puissance)
+Projectile::Projectile(QPoint point, int direction, int puissance)
 {
 
-    QPointF tmp(point.x() + (puissance*cos(direction)), point.y() + (puissance*sin(direction)));
+    QPoint tmp(point.x() + (puissance*cos(direction)), point.y() + (puissance*sin(direction)));
     //On imagine un cercle de rayon puissance avec pour centre le tank et on en extrait le point à l'angle direction
     pointImpact = tmp;
 }
