@@ -77,6 +77,14 @@ void Jeu::setTypeProjectileSelected(int value)
     typeProjectileSelected = value;
 }
 
+QPoint Jeu::identifierCase(QPoint p)
+{
+    QPoint o;
+    o.setX(p.x()/(LMaxTerrain/NMAX));
+    o.setY(p.y()/(CMaxTerrain/NMAX));
+    return o;
+}
+
 Jeu::Jeu(int L, int C) : QGraphicsView()
 {
     setFixedSize(L, C);
@@ -301,7 +309,7 @@ void Jeu::destructionTerrain(Projectile *tir){
     int valeurAEnlever = 10;
 
     if(tailleImpact == 1){
-        ter.setResistanceCase(pointImpact.x()*100/NMAX, pointImpact.y()/NMAX, valeurAEnlever);
+        ter.setResistanceCase(identifierCase(tir->getPointImpact()), valeurAEnlever);
         qDebug() << pointImpact;
         qDebug()<< "Case a endommager " << pointImpact.x()/NMAX << " " << pointImpact.y()/NMAX;
 

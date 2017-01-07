@@ -61,15 +61,15 @@ void Terrain::setTerrainNormal(int i, int j)
     ter[i][j] = new TerrainNormal();
 }
 
-void Terrain::setResistanceCase(int i, int j, int valeurAEnlever)
+void Terrain::setResistanceCase(QPoint caseAChanger, int valeurAEnlever)
 {
-    if(ter[i][j]->getIdentifiant() == 0 || ter[i][j]->getIdentifiant() == 3){
-        if(ter[i][j]->getResistance() - valeurAEnlever <= 0){
-            delete ter[i][j];
-            ter[i][j] = new TerrainNormal();
+    if(ter[caseAChanger.x()][caseAChanger.y()]->getIdentifiant() == 0 || ter[caseAChanger.x()][caseAChanger.y()]->getIdentifiant() == 3){
+        if(ter[caseAChanger.x()][caseAChanger.y()]->getResistance() - valeurAEnlever <= 0){
+            delete ter[caseAChanger.x()][caseAChanger.y()];
+            ter[caseAChanger.x()][caseAChanger.y()] = new TerrainNormal();
         }
         else{
-            ter[i][j]->setResistance(ter[i][j]->getResistance() - valeurAEnlever);
+            ter[caseAChanger.x()][caseAChanger.y()]->setResistance(ter[caseAChanger.x()][caseAChanger.y()]->getResistance() - valeurAEnlever);
         }
     }
 }

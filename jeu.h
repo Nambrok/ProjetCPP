@@ -68,10 +68,13 @@ public:
     int getTypeProjectileSelected() const;
     void setTypeProjectileSelected(int value);
 
+    QPoint identifierCase(QPoint p);
+
     ~Jeu();
 
 signals:
     void changementTour(int tour);
+    void fermeture();
 
 public slots:
     void changerTour();
