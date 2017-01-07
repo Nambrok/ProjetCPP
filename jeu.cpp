@@ -294,9 +294,9 @@ void Jeu::tirer()
     QGraphicsPixmapItem *t = scene->addPixmap(tir->getTexture()->scaled(LMaxTerrain/NMAX/5, CMaxTerrain/NMAX/5));
     t->setZValue(1);
     t->setPos(tir->getPointImpact() + QPoint((LMaxTerrain/NMAX)/2, (CMaxTerrain/NMAX)/2));
-    qDebug() << tankActuel->getHorizon() << " " << tankActuel->getAngleDeTir();
-    qDebug() << tir->getPointImpact();
-    qDebug() << tir->getTailleImpact();
+    qDebug()<<"Jeu::tirer : tankActuel : Horizon :" << tankActuel->getHorizon() << " Angle : " << tankActuel->getAngleDeTir();
+    qDebug()<< "Jeu::tirer : Point d'impact de tir : " << tir->getPointImpact();
+    //qDebug() << tir->getTailleImpact();
 
     destructionTerrain(tir);
     mettreAJourTerrain();
@@ -310,8 +310,8 @@ void Jeu::destructionTerrain(Projectile *tir){
 
     if(tailleImpact == 1){
         ter.setResistanceCase(identifierCase(tir->getPointImpact()), valeurAEnlever);
-        qDebug() << pointImpact;
-        qDebug()<< "Case a endommager " << pointImpact.x()/NMAX << " " << pointImpact.y()/NMAX;
+        qDebug()<< "Jeu::destructionTerrain : Point d'Impact de tir :" << pointImpact;
+        qDebug()<< "Jeu::destructionTerrain : Case a endommager " << pointImpact.x()/NMAX << " " << pointImpact.y()/NMAX;
 
     }
 
