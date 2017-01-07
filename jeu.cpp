@@ -141,7 +141,6 @@ Jeu::Jeu(int L, int C) : QGraphicsView()
     proxy = scene->addWidget(radio3);
     proxy->setPos(LMaxTerrain + radio1->width() + radio2->width(), 0);
 
-
     this->setScene(scene);
     chargerTerrain();
 }
