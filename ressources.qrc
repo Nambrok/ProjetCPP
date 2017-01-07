@@ -4,7 +4,6 @@
         <file>RessourcesProjet/crevasse.jpg</file>
         <file>RessourcesProjet/eau.jpg</file>
         <file>RessourcesProjet/explosion.jpg</file>
-        <file>RessourcesProjet/obus.jpg</file>
         <file>RessourcesProjet/roche.jpg</file>
         <file>RessourcesProjet/terrainNormal.jpg</file>
         <file>RessourcesProjet/bleuBas.png</file>
@@ -15,5 +14,6 @@
         <file>RessourcesProjet/rougeDroit.png</file>
         <file>RessourcesProjet/rougeGauche.png</file>
         <file>RessourcesProjet/rougeHaut.png</file>
+        <file>RessourcesProjet/obus.png</file>
     </qresource>
 </RCC>

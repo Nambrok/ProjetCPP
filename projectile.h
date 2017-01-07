@@ -12,7 +12,7 @@ private:
     QPixmap* texture;
 
 public:
-    Projectile(QPointF point, QPoint direction, int puissance);
+    Projectile(QPointF point, int direction, int puissance);
 
     QPointF getPointImpact() const;
     int getTailleImpact();

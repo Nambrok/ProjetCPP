@@ -72,6 +72,7 @@ public slots:
     void changerTour();
     void changerHorizonTankActuel(int newH);
     void tirer();
+    void changerAngleTirActuel(int newA);
 };
 
 #endif // JEU_H

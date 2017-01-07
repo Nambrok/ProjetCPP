@@ -30,7 +30,7 @@ private:
 public:
     Tank();
     bool isAlive();
-    Projectile *useObus1(QPointF posTank, QPoint dir, int puis);
+    Projectile *useObus1(QPointF posTank, int dir, int puis);
     Projectile *useObus2(QPointF posTank, QPoint dir, int puis);
     Projectile *useObus3(QPointF posTank, QPoint dir, int puis);
     int getNbObus2() const;
@@ -56,6 +56,8 @@ public:
     void moveBy(int dx, int dy);
     int getHorizon() const;
     void setHorizon(int value);
+    int getAngleDeTir() const;
+    void setAngleDeTir(int value);
 };
 
 #endif // TANK_H

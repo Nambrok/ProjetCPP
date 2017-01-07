@@ -25,11 +25,11 @@ void Projectile::setTexture(QPixmap *value)
     texture = value;
 }
 
-Projectile::Projectile(QPointF point, QPoint direction, int puissance)
+Projectile::Projectile(QPointF point, int direction, int puissance)
 {
-    for(int i = 0; i<puissance; i++){
-        point += direction;
-    }
+//direction est un entier entre 0 et 359, on doit en déduire la direction sous forme d'un QPoint pour l'utiliser comme vecteur ensuite
+
+
 
     pointImpact = point;
 }

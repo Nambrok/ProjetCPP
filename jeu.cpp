@@ -126,7 +126,8 @@ Jeu::Jeu(int L, int C) : QGraphicsView()
     QObject::connect(this, SIGNAL(changementTour(int)), nbTour, SLOT(display(int)));
     proxy = scene->addWidget(nbTour);
     proxy->setPos(LMaxTerrain + ((L - LMaxTerrain)/2) - (nbTour->width()/2), C*0.50);;
-    //Gestion Puissance
+
+    //Gestion du facteur horizontal du tank
     QSlider * slideHorizon = new QSlider(Qt::Horizontal);
     slideHorizon->setPalette(fondblanc);
     slideHorizon->setRange(0, 360);
@@ -135,6 +136,13 @@ Jeu::Jeu(int L, int C) : QGraphicsView()
     proxy->setPos(LMaxTerrain + ((L - LMaxTerrain)/2) - (slideHorizon->width()/2), C*0.50+nbTour->height());
     proxy->setGeometry(QRect(LMaxTerrain, C*0.50+nbTour->height(), L - LMaxTerrain, 10));
     //affichage Puissance
+
+    QSlider * slideAngle = new QSlider(Qt::Vertical);
+    slideAngle->setPalette(fondblanc);
+    slideAngle->setRange(0, 91);
+    QObject::connect(slideAngle, SIGNAL(valueChanged(int)), this, SLOT(changerAngleTirActuel(int)));
+    proxy = scene->addWidget(slideAngle);
+    proxy->setPos(LMaxTerrain + slideAngle->width(), C*0.60);
 
     //Choix projectile
     QRadioButton *radio1 = new QRadioButton(tr("Obus"));
@@ -151,6 +159,7 @@ Jeu::Jeu(int L, int C) : QGraphicsView()
     proxy->setPos(LMaxTerrain + radio1->width(), 0);
     proxy = scene->addWidget(radio3);
     proxy->setPos(LMaxTerrain + radio1->width() + radio2->width(), 0);
+
 
     QPushButton * tirer = new QPushButton("Tirer");
     proxy = scene->addWidget(tirer);
@@ -238,9 +247,13 @@ void Jeu::changerHorizonTankActuel(int newH)
     tankActuel->setHorizon(newH);
 }
 
+void Jeu::changerAngleTirActuel(int newA){
+    tankActuel->setAngleDeTir(newA);
+}
+
 void Jeu::tirer()
 {
-    Projectile* tir = tankActuel->useObus1(imgTankActuel->pos(), QPoint(1,1), 100);
+    Projectile* tir = tankActuel->useObus1(imgTankActuel->pos(), tankActuel->getHorizon(), 100);
     QGraphicsPixmapItem *t = scene->addPixmap(tir->getTexture()->scaled(LMaxTerrain/NMAX, CMaxTerrain/NMAX));
     t->setPos(tir->getPointImpact());
     delete tir;

@@ -122,6 +122,16 @@ void Tank::setHorizon(int value)
     horizon = value;
 }
 
+int Tank::getAngleDeTir() const
+{
+    return angleDeTir;
+}
+
+void Tank::setAngleDeTir(int value)
+{
+    angleDeTir = value;
+}
+
 Tank::Tank()
 {
     capacite = 100;
@@ -134,7 +144,7 @@ bool Tank::isAlive()
     return alive;
 }
 
-Projectile* Tank::useObus1(QPointF posTank, QPoint dir, int puis)
+Projectile* Tank::useObus1(QPointF posTank, int dir, int puis)
 {
     return new Obus(posTank, dir, puis);
 }
