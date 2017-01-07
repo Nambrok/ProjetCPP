@@ -63,7 +63,15 @@ void Terrain::setTerrainNormal(int i, int j)
 
 void Terrain::setResistanceCase(int i, int j, int valeurAEnlever)
 {
-    ter[i][j]->setResistance(ter[i][j]->getResistance() - valeurAEnlever);
+    if(ter[i][j]->getIdentifiant() == 0 || ter[i][j]->getIdentifiant() == 3){
+        if(ter[i][j]->getResistance() - valeurAEnlever <= 0){
+            delete ter[i][j];
+            ter[i][j] = new TerrainNormal();
+        }
+        else{
+            ter[i][j]->setResistance(ter[i][j]->getResistance() - valeurAEnlever);
+        }
+    }
 }
 
 Terrain::~Terrain()
