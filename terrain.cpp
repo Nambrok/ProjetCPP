@@ -54,3 +54,9 @@ Joueur *Terrain::getJ2()
 {
     return j2;
 }
+
+void Terrain::setTerrainNormal(int i, int j)
+{
+    delete ter[i][j];
+    ter[i][j] = new TerrainNormal();
+}

@@ -1,7 +1,8 @@
 #include "obus.h"
 
 
-Obus::Obus(QPoint point, QPoint direction, int puissance) : Projectile(point, direction, puissance)
+Obus::Obus(QPointF point, QPoint direction, int puissance) : Projectile(point, direction, puissance)
 {
  setTailleImpact(1);
+ setTexture(new QPixmap(":/sprites/RessourcesProjet/obus.jpg"));
 }

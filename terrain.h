@@ -25,6 +25,8 @@ public:
     Obstacle* getCase(int i, int j);
     Joueur* getJ1();
     Joueur* getJ2();
+
+    void setTerrainNormal(int i, int j);
 };
 
 #endif // TERRAIN_H

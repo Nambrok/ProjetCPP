@@ -67,6 +67,16 @@ void Jeu::keyPressEvent(QKeyEvent *event)
 
 }
 
+int Jeu::getTypeProjectileSelected() const
+{
+    return typeProjectileSelected;
+}
+
+void Jeu::setTypeProjectileSelected(int value)
+{
+    typeProjectileSelected = value;
+}
+
 Jeu::Jeu(int L, int C) : QGraphicsView()
 {
     setFixedSize(L, C);
@@ -76,6 +86,7 @@ Jeu::Jeu(int L, int C) : QGraphicsView()
     LMaxTerrain = L*0.80;
     CMaxTerrain = C;
     setTour(0);
+    setTypeProjectileSelected(0); // Les obus sont séléctionnés à la création du terrain.
 
     setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
     setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
@@ -140,6 +151,11 @@ Jeu::Jeu(int L, int C) : QGraphicsView()
     proxy->setPos(LMaxTerrain + radio1->width(), 0);
     proxy = scene->addWidget(radio3);
     proxy->setPos(LMaxTerrain + radio1->width() + radio2->width(), 0);
+
+    QPushButton * tirer = new QPushButton("Tirer");
+    proxy = scene->addWidget(tirer);
+    proxy->setPos(L-tirer->width() - 2, C-tirer->height()-2);
+    QObject::connect(tirer, SIGNAL(clicked(bool)), this, SLOT(tirer()));
 
     this->setScene(scene);
     chargerTerrain();
@@ -220,5 +236,13 @@ void Jeu::changerTour()
 void Jeu::changerHorizonTankActuel(int newH)
 {
     tankActuel->setHorizon(newH);
+}
+
+void Jeu::tirer()
+{
+    Projectile* tir = tankActuel->useObus1(imgTankActuel->pos(), QPoint(1,1), 100);
+    QGraphicsPixmapItem *t = scene->addPixmap(tir->getTexture()->scaled(LMaxTerrain/NMAX, CMaxTerrain/NMAX));
+    t->setPos(tir->getPointImpact());
+    delete tir;
 }
 

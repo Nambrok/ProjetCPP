@@ -2,19 +2,23 @@
 #define PROJECTILE_H
 
 #include <QPoint>
+#include <QPixmap>
 
 class Projectile
 {
 private:
-    QPoint pointImpact;
-protected:
+    QPointF pointImpact;
     int tailleImpact;
-public:
-    Projectile(QPoint point, QPoint direction, int puissance);
+    QPixmap* texture;
 
-    QPoint getPointImpact() const;
+public:
+    Projectile(QPointF point, QPoint direction, int puissance);
+
+    QPointF getPointImpact() const;
     int getTailleImpact();
     void setTailleImpact(int value);
+    QPixmap *getTexture() const;
+    void setTexture(QPixmap *value);
 };
 
 #endif // PROJECTILE_H

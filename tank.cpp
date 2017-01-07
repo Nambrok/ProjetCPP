@@ -134,12 +134,12 @@ bool Tank::isAlive()
     return alive;
 }
 
-Projectile* Tank::useObus1(QPoint posTank, QPoint dir, int puis)
+Projectile* Tank::useObus1(QPointF posTank, QPoint dir, int puis)
 {
     return new Obus(posTank, dir, puis);
 }
 
-Projectile* Tank::useObus2(QPoint posTank, QPoint dir, int puis)
+Projectile* Tank::useObus2(QPointF posTank, QPoint dir, int puis)
 {
     if(nbObus2 > 0){
         nbObus2--;
@@ -150,7 +150,7 @@ Projectile* Tank::useObus2(QPoint posTank, QPoint dir, int puis)
     return NULL;
 }
 
-Projectile* Tank::useObus3(QPoint posTank, QPoint dir, int puis)
+Projectile* Tank::useObus3(QPointF posTank, QPoint dir, int puis)
 {
     if(nbObus3 > 0){
         nbObus3--;

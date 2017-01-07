@@ -1,6 +1,6 @@
 #include "projectile.h"
 
-QPoint Projectile::getPointImpact() const
+QPointF Projectile::getPointImpact() const
 {
     return pointImpact;
 }
@@ -15,7 +15,17 @@ void Projectile::setTailleImpact(int value)
     tailleImpact = value;
 }
 
-Projectile::Projectile(QPoint point, QPoint direction, int puissance)
+QPixmap *Projectile::getTexture() const
+{
+    return texture;
+}
+
+void Projectile::setTexture(QPixmap *value)
+{
+    texture = value;
+}
+
+Projectile::Projectile(QPointF point, QPoint direction, int puissance)
 {
     for(int i = 0; i<puissance; i++){
         point += direction;

@@ -5,6 +5,7 @@
 
 #include <QPixmap>
 #include <QPoint>
+#include <QPointF>
 #include <random>
 #include <vector>
 #include <projectile.h>
@@ -29,9 +30,9 @@ private:
 public:
     Tank();
     bool isAlive();
-    Projectile *useObus1(QPoint posTank, QPoint dir, int puis);
-    Projectile *useObus2(QPoint posTank, QPoint dir, int puis);
-    Projectile *useObus3(QPoint posTank, QPoint dir, int puis);
+    Projectile *useObus1(QPointF posTank, QPoint dir, int puis);
+    Projectile *useObus2(QPointF posTank, QPoint dir, int puis);
+    Projectile *useObus3(QPointF posTank, QPoint dir, int puis);
     int getNbObus2() const;
     int getNbObus3() const;
 

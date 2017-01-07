@@ -51,6 +51,7 @@ private:
     Tank *tankActuel;
     QGraphicsPixmapItem *imgTankActuel;
     void keyPressEvent(QKeyEvent *event);
+    int typeProjectileSelected;//0 obus, 1 missile, 2 nuke
 
 public:
     Jeu(int L, int C);
@@ -61,12 +62,16 @@ public:
     void setTour(int newTour);
     void choisirTankActuel();
 
+    int getTypeProjectileSelected() const;
+    void setTypeProjectileSelected(int value);
+
 signals:
     void changementTour(int tour);
 
 public slots:
     void changerTour();
     void changerHorizonTankActuel(int newH);
+    void tirer();
 };
 
 #endif // JEU_H
