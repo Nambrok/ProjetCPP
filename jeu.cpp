@@ -106,13 +106,14 @@ Jeu::Jeu(int L, int C) : QGraphicsView()
     sortie->setText("Quitter");
     QObject::connect(sortie, SIGNAL(clicked(bool)), qApp, SLOT(quit()));
     QGraphicsProxyWidget *proxy = scene->addWidget(sortie);
-    proxy->setPos(LMaxTerrain + ((L - LMaxTerrain)/2) - (sortie->width()/2), C*0.60);
+    proxy->setPos(L-sortie->width() - 2, C-sortie->height()-2);
     //Changer de tour
     QPushButton * change = new QPushButton;
     change->setText("Changer de tour");
     QObject::connect(change, SIGNAL(clicked(bool)), this, SLOT(changerTour()));
     proxy = scene->addWidget(change);
     proxy->setPos(LMaxTerrain + ((L - LMaxTerrain)/2) - (change->width()/2), C*0.60-sortie->height());
+
     //Afficher Tour
     QLabel * tour = new QLabel;
     tour->setText("Tour :");
@@ -163,7 +164,7 @@ Jeu::Jeu(int L, int C) : QGraphicsView()
 
     QPushButton * tirer = new QPushButton("Tirer");
     proxy = scene->addWidget(tirer);
-    proxy->setPos(L-tirer->width() - 2, C-tirer->height()-2);
+    proxy->setPos(LMaxTerrain + ((L - LMaxTerrain)/2) - (tirer->width()/2), C*0.60);
     QObject::connect(tirer, SIGNAL(clicked(bool)), this, SLOT(tirer()));
 
     this->setScene(scene);
@@ -201,10 +202,13 @@ void Jeu::afficherTankInit(Joueur *j1, Joueur *j2)
      j2->getTank()->setCapacite(NMAX/10);
      tank1 = scene->addPixmap(j1->getTank()->getTexture().scaled(LMaxTerrain/NMAX, CMaxTerrain/NMAX));
      tank1->setPos((LMaxTerrain/NMAX)*j1->getTank()->getAdd().x(), (CMaxTerrain/NMAX)*j1->getTank()->getAdd().y());
+     tank1->setZValue(1);
+     scene->addEllipse(tank1->x()-10, tank1->y()-10, 20, 20);
 
      tank2 = scene->addPixmap(j2->getTank()->getTexture().scaled(LMaxTerrain/NMAX, CMaxTerrain/NMAX));
      tank2->setPos((LMaxTerrain/NMAX)*j2->getTank()->getAdd().x(), (CMaxTerrain/NMAX)*j2->getTank()->getAdd().y());
-
+     tank2->setZValue(1);
+     scene->addEllipse(tank2->x()+(LMaxTerrain/NMAX)-100, tank2->y()+(CMaxTerrain/NMAX)-100, 200, 200);
      tankActuel = j1->getTank();
      imgTankActuel = tank1;
 }
@@ -232,11 +236,16 @@ void Jeu::changerTour()
     tour += 1;
     if(getTour() == J1){
         tankActuel = ter.getJ1()->getTank();
+        tankActuel->setAngleDeTir(ter.getJ2()->getTank()->getAngleDeTir());
+        //On met à jour angleDeTir et l'Horizon du tank qui prend le tour car sinon il sont à l'ancienne donné si on ne touche pas aux sliders.
+        tankActuel->setHorizon(ter.getJ2()->getTank()->getHorizon());
         imgTankActuel = tank1;
     }
     else if(getTour() == J2){
         tankActuel = ter.getJ2()->getTank();
         imgTankActuel = tank2;
+        tankActuel->setAngleDeTir(ter.getJ1()->getTank()->getAngleDeTir());
+        tankActuel->setHorizon(ter.getJ1()->getTank()->getHorizon());
     }
     tankActuel->setCapacite(NMAX/10);
     emit changementTour(tour);
@@ -256,6 +265,21 @@ void Jeu::tirer()
     Projectile* tir = tankActuel->useObus1(imgTankActuel->pos(), tankActuel->getHorizon(), tankActuel->getAngleDeTir());
     QGraphicsPixmapItem *t = scene->addPixmap(tir->getTexture()->scaled(LMaxTerrain/NMAX, CMaxTerrain/NMAX));
     t->setPos(tir->getPointImpact());
+
+//TODO: On doit prendre en compte la taille de l'impact et enlever la vie des obstacles toucher
+//Si un des tank est toucher, on déclare la défaite et la fin de la partie.x
+//    if(ter.getJ1()->getTank()->getAdd().x() == tir->getPointImpact().x()/NMAX && ter.getJ1()->getTank()->getAdd().x() == tir->getPointImpact().y()/NMAX)
+//    {
+//        ter.getJ1()->defaite();
+//        tank1->hide();
+//        victoire(tour);
+//    }
+//    if(ter.getJ2()->getTank()->getAdd().x() == tir->getPointImpact().x()/NMAX && ter.getJ2()->getTank()->getAdd().x() == tir->getPointImpact().y()/NMAX)
+//    {
+//        ter.getJ2()->defaite();
+//        tank2->hide();
+//        victoire(tour);
+//    }
     delete tir;
 }
 
