@@ -2,10 +2,11 @@
 #define OBUS_H
 #include "projectile.h"
 
-class Arbre : public Projectile
+class Obus : public Projectile
 {
 public:
-    obus();
+    Obus();
+    Obus(QPoint point, QPoint direction, int puissance);
 };
 
 #endif // OBUS_H

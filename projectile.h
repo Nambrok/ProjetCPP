@@ -1,27 +1,16 @@
-#ifndef OBUS_H
-#define OBUS_H
-#include <QPixmap>
-#include <QPoint>
-#include <random>
-#include <QColor>
+#ifndef PROJECTILE_H
+#define PROJECTILE_H
 
-class Tank
+#include <QPoint>
+
+class Projectile
 {
 private:
-    int degats;
-    int radius; //point central + rayon de radius
-    QColor couleur;
-    QPixmap *texture;
-    QPoint impact;
+    int pointImpact;
 public:
-    Obstacle();
-    void setDegats(int newDmg);
-    int getRadius();
-    int getDegats();
-    QColor getCouleur();
-    void setCouleur(QColor newCouleur);
-    QPixmap getTexture();
+    Projectile(QPoint point, QPoint direction, int puissance);
 
-protected:
-    void setTexture(QPixmap *newTexture);
-#endif // OBUS_H
+    int getPointImpact() const;
+};
+
+#endif // PROJECTILE_H

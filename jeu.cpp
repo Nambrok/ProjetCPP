@@ -126,13 +126,17 @@ Jeu::Jeu(int L, int C) : QGraphicsView()
     //affichage Puissance
 
     //Choix projectile
-    /*QRadioButton *radio1 = new QRadioButton(tr("Obus"));
+    QRadioButton *radio1 = new QRadioButton(tr("Obus"));
     QRadioButton *radio2 = new QRadioButton(tr("Missile"));
     QRadioButton *radio3 = new QRadioButton(tr("Nuke"));
     radio1->setChecked(true);
-    */
 
-
+    proxy = scene->addWidget(radio1);
+    proxy->setPos(LMaxTerrain, 0);
+    proxy = scene->addWidget(radio2);
+    proxy->setPos(LMaxTerrain + radio1->width(), 0);
+    proxy = scene->addWidget(radio3);
+    proxy->setPos(LMaxTerrain + radio1->width() + radio2->width(), 0);
 
 
     this->setScene(scene);
@@ -166,6 +170,8 @@ void Jeu::chargerTerrain()
 
 void Jeu::afficherTankInit(Joueur *j1, Joueur *j2)
 {
+     j1->getTank()->setCapacite(NMAX/10);
+     j2->getTank()->setCapacite(NMAX/10);
      tank1 = scene->addPixmap(j1->getTank()->getTexture().scaled(LMaxTerrain/NMAX, CMaxTerrain/NMAX));
      tank1->setPos((LMaxTerrain/NMAX)*j1->getTank()->getAdd().x(), (CMaxTerrain/NMAX)*j1->getTank()->getAdd().y());
 

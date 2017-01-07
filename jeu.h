@@ -20,6 +20,7 @@
 #include <QPalette>
 #include <QLCDNumber>
 #include <QSlider>
+#include <QRadioButton>
 
 #include <QKeyEvent>
 

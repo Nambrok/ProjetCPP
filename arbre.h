@@ -2,10 +2,10 @@
 #define ARBRE_H
 #include "obstacle.h"
 
-class Arbre : public Obstacle
+class Obus : public Obstacle
 {
 public:
-    Arbre();
+    Obus();
 };
 
 #endif // ARBRE_H

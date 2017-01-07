@@ -10,7 +10,9 @@ SOURCES += main.cpp \
     eau.cpp \
     crevasse.cpp \
     roche.cpp \
-    joueur.cpp
+    joueur.cpp \
+    obus.cpp \
+    projectile.cpp
 
 HEADERS += \
     jeu.h \
@@ -23,7 +25,8 @@ HEADERS += \
     crevasse.h \
     roche.h \
     joueur.h \
-    obus.h
+    obus.h \
+    projectile.h
 
 FORMS +=
 
