@@ -253,7 +253,7 @@ void Jeu::changerAngleTirActuel(int newA){
 
 void Jeu::tirer()
 {
-    Projectile* tir = tankActuel->useObus1(imgTankActuel->pos(), tankActuel->getHorizon(), 100);
+    Projectile* tir = tankActuel->useObus1(imgTankActuel->pos(), tankActuel->getHorizon(), tankActuel->getAngleDeTir());
     QGraphicsPixmapItem *t = scene->addPixmap(tir->getTexture()->scaled(LMaxTerrain/NMAX, CMaxTerrain/NMAX));
     t->setPos(tir->getPointImpact());
     delete tir;
