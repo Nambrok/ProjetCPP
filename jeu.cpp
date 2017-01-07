@@ -90,19 +90,19 @@ Jeu::Jeu(int L, int C) : QGraphicsView()
 
     QGraphicsRectItem * rect = scene->addRect(0, 0, LMaxTerrain, CMaxTerrain);
     rect->setBrush(background);
-
+    //QUITTER
     QPushButton * sortie = new QPushButton;
     sortie->setText("Quitter");
     QObject::connect(sortie, SIGNAL(clicked(bool)), qApp, SLOT(quit()));
     QGraphicsProxyWidget *proxy = scene->addWidget(sortie);
     proxy->setPos(LMaxTerrain + ((L - LMaxTerrain)/2) - (sortie->width()/2), C*0.60);
-
+    //Changer de tour
     QPushButton * change = new QPushButton;
     change->setText("Changer de tour");
     QObject::connect(change, SIGNAL(clicked(bool)), this, SLOT(changerTour()));
     proxy = scene->addWidget(change);
     proxy->setPos(LMaxTerrain + ((L - LMaxTerrain)/2) - (change->width()/2), C*0.60-sortie->height());
-
+    //Afficher Tour
     QLabel * tour = new QLabel;
     tour->setText("Tour :");
     tour->setPalette(fondblanc);
@@ -115,7 +115,7 @@ Jeu::Jeu(int L, int C) : QGraphicsView()
     QObject::connect(this, SIGNAL(changementTour(int)), nbTour, SLOT(display(int)));
     proxy = scene->addWidget(nbTour);
     proxy->setPos(LMaxTerrain + ((L - LMaxTerrain)/2) - (nbTour->width()/2), C*0.50);;
-
+    //Gestion Puissance
     QSlider * slideHorizon = new QSlider(Qt::Horizontal);
     slideHorizon->setPalette(fondblanc);
     slideHorizon->setRange(0, 360);
@@ -123,6 +123,14 @@ Jeu::Jeu(int L, int C) : QGraphicsView()
     proxy = scene->addWidget(slideHorizon);
     proxy->setPos(LMaxTerrain + ((L - LMaxTerrain)/2) - (slideHorizon->width()/2), C*0.50+nbTour->height());
     proxy->setGeometry(QRect(LMaxTerrain, C*0.50+nbTour->height(), L - LMaxTerrain, 10));
+    //affichage Puissance
+
+    //Choix projectile
+    /*QRadioButton *radio1 = new QRadioButton(tr("Obus"));
+    QRadioButton *radio2 = new QRadioButton(tr("Missile"));
+    QRadioButton *radio3 = new QRadioButton(tr("Nuke"));
+    radio1->setChecked(true);
+    */
 
 
 
