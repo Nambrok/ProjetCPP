@@ -265,6 +265,9 @@ void Jeu::tirer()
     Projectile* tir = tankActuel->useObus1(imgTankActuel->pos(), tankActuel->getHorizon(), tankActuel->getAngleDeTir());
     QGraphicsPixmapItem *t = scene->addPixmap(tir->getTexture()->scaled(LMaxTerrain/NMAX, CMaxTerrain/NMAX));
     t->setPos(tir->getPointImpact());
+    qDebug() << tankActuel->getHorizon() << " " << tankActuel->getAngleDeTir();
+    qDebug() << tir->getPointImpact();
+    qDebug() << tir->getTailleImpact();
 
 //TODO: On doit prendre en compte la taille de l'impact et enlever la vie des obstacles toucher
 //Si un des tank est toucher, on déclare la défaite et la fin de la partie.x
