@@ -283,9 +283,9 @@ void Jeu::changerAngleTirActuel(int newA){
 void Jeu::tirer()
 {
     Projectile* tir = tankActuel->useObus1(imgTankActuel->pos(), tankActuel->getHorizon(), tankActuel->getAngleDeTir());
-    QGraphicsPixmapItem *t = scene->addPixmap(tir->getTexture()->scaled(LMaxTerrain/NMAX, CMaxTerrain/NMAX));
+    QGraphicsPixmapItem *t = scene->addPixmap(tir->getTexture()->scaled(LMaxTerrain/NMAX/5, CMaxTerrain/NMAX/5));
     t->setZValue(1);
-    t->setPos(tir->getPointImpact());
+    t->setPos(tir->getPointImpact()+QPoint(LMaxTerrain/NMAX/2, CMaxTerrain/NMAX/2));
     qDebug() << tankActuel->getHorizon() << " " << tankActuel->getAngleDeTir();
     qDebug() << tir->getPointImpact();
     qDebug() << tir->getTailleImpact();
@@ -298,7 +298,7 @@ void Jeu::tirer()
 void Jeu::destructionTerrain(Projectile *tir){
     QPointF pointImpact = tir->getPointImpact();
     int tailleImpact = tir->getTailleImpact();
-    int valeurAEnlever = 1;
+    int valeurAEnlever = 10;
 
     if(tailleImpact == 1){
         ter.setResistanceCase(pointImpact.x()/NMAX, pointImpact.y()/NMAX, valeurAEnlever);
