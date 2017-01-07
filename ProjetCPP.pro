@@ -22,7 +22,8 @@ HEADERS += \
     eau.h \
     crevasse.h \
     roche.h \
-    joueur.h
+    joueur.h \
+    obus.h
 
 FORMS +=
 
