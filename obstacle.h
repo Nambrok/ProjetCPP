@@ -22,6 +22,7 @@ public:
     void setCouleur(QColor newCouleur);
     QPixmap getTexture();
     int getIdentifiant() const;
+    ~Obstacle();
 
 protected:
     void setTexture(QPixmap *newTexture);

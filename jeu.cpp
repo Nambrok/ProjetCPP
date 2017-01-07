@@ -196,6 +196,28 @@ void Jeu::chargerTerrain()
     afficherTankInit(ter.getJ1(), ter.getJ2());
 }
 
+void Jeu::mettreAJourTerrain(){
+    int Lact = 0, Cact = 0;
+    //QGraphicsRectItem * rect;
+
+    for(int j = 0; j<NMAX; j++){
+        for(int i = 0; i<NMAX; i++){
+            Obstacle* ob = ter.getCase(i, j);
+
+           // rect = new QGraphicsRectItem(Lact, Cact, LMaxTerrain/NMAX, CMaxTerrain/NMAX);
+           // rect->setBrush(ob->getCouleur());
+
+            QGraphicsPixmapItem * pix = scene->addPixmap(ob->getTexture().scaled(LMaxTerrain/NMAX, CMaxTerrain/NMAX));
+            pix->setPos(Lact, Cact);
+
+            //scene->addItem(rect);
+            Lact+= LMaxTerrain/NMAX;
+        }
+        Lact = 0;
+        Cact += (CMaxTerrain)/NMAX;
+    }
+}
+
 void Jeu::afficherTankInit(Joueur *j1, Joueur *j2)
 {
      j1->getTank()->setCapacite(NMAX/10);
@@ -203,12 +225,10 @@ void Jeu::afficherTankInit(Joueur *j1, Joueur *j2)
      tank1 = scene->addPixmap(j1->getTank()->getTexture().scaled(LMaxTerrain/NMAX, CMaxTerrain/NMAX));
      tank1->setPos((LMaxTerrain/NMAX)*j1->getTank()->getAdd().x(), (CMaxTerrain/NMAX)*j1->getTank()->getAdd().y());
      tank1->setZValue(1);
-     scene->addEllipse(tank1->x()-10, tank1->y()-10, 20, 20);
 
      tank2 = scene->addPixmap(j2->getTank()->getTexture().scaled(LMaxTerrain/NMAX, CMaxTerrain/NMAX));
      tank2->setPos((LMaxTerrain/NMAX)*j2->getTank()->getAdd().x(), (CMaxTerrain/NMAX)*j2->getTank()->getAdd().y());
      tank2->setZValue(1);
-     scene->addEllipse(tank2->x()+(LMaxTerrain/NMAX)-100, tank2->y()+(CMaxTerrain/NMAX)-100, 200, 200);
      tankActuel = j1->getTank();
      imgTankActuel = tank1;
 }
@@ -264,25 +284,32 @@ void Jeu::tirer()
 {
     Projectile* tir = tankActuel->useObus1(imgTankActuel->pos(), tankActuel->getHorizon(), tankActuel->getAngleDeTir());
     QGraphicsPixmapItem *t = scene->addPixmap(tir->getTexture()->scaled(LMaxTerrain/NMAX, CMaxTerrain/NMAX));
+    t->setZValue(1);
     t->setPos(tir->getPointImpact());
     qDebug() << tankActuel->getHorizon() << " " << tankActuel->getAngleDeTir();
     qDebug() << tir->getPointImpact();
     qDebug() << tir->getTailleImpact();
 
-//TODO: On doit prendre en compte la taille de l'impact et enlever la vie des obstacles toucher
-//Si un des tank est toucher, on déclare la défaite et la fin de la partie.x
-//    if(ter.getJ1()->getTank()->getAdd().x() == tir->getPointImpact().x()/NMAX && ter.getJ1()->getTank()->getAdd().x() == tir->getPointImpact().y()/NMAX)
-//    {
-//        ter.getJ1()->defaite();
-//        tank1->hide();
-//        victoire(tour);
-//    }
-//    if(ter.getJ2()->getTank()->getAdd().x() == tir->getPointImpact().x()/NMAX && ter.getJ2()->getTank()->getAdd().x() == tir->getPointImpact().y()/NMAX)
-//    {
-//        ter.getJ2()->defaite();
-//        tank2->hide();
-//        victoire(tour);
-//    }
+    destructionTerrain(tir);
+    mettreAJourTerrain();
     delete tir;
+}
+
+void Jeu::destructionTerrain(Projectile *tir){
+    QPointF pointImpact = tir->getPointImpact();
+    int tailleImpact = tir->getTailleImpact();
+    int valeurAEnlever = 1;
+
+    if(tailleImpact == 1){
+        ter.setResistanceCase(pointImpact.x()/NMAX, pointImpact.y()/NMAX, valeurAEnlever);
+    }
+
+}
+
+Jeu::~Jeu(){
+    delete scene;
+    delete tank1;
+    delete tank2;
+    delete imgTankActuel;
 }
 

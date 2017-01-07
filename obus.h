@@ -6,6 +6,7 @@ class Obus : public Projectile
 {
 public:
     Obus(QPointF point, int direction, int puissance);
+    ~Obus();
 };
 
 #endif // OBUS_H

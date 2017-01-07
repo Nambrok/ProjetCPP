@@ -25,6 +25,11 @@ void Projectile::setTexture(QPixmap *value)
     texture = value;
 }
 
+Projectile::~Projectile()
+{
+    delete texture;
+}
+
 Projectile::Projectile(QPointF point, int direction, int puissance)
 {
 

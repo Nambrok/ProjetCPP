@@ -6,6 +6,7 @@ class Eau : public Obstacle
 {
 public:
     Eau();
+    ~Eau();
 };
 
 #endif // EAU_H

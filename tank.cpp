@@ -132,6 +132,14 @@ void Tank::setAngleDeTir(int value)
     angleDeTir = value;
 }
 
+Tank::~Tank()
+{
+    delete textureBas;
+    delete textureDroite;
+    delete textureGauche;
+    delete textureHaut;
+}
+
 Tank::Tank()
 {
     capacite = 100;

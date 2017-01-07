@@ -19,6 +19,8 @@ public:
     void setTailleImpact(int value);
     QPixmap *getTexture() const;
     void setTexture(QPixmap *value);
+
+    ~Projectile();
 };
 
 #endif // PROJECTILE_H

@@ -6,3 +6,8 @@ Arbre::Arbre() : Obstacle(1, 0)
     setCouleur(QColor(91, 60, 17));
     setTexture(new QPixmap(":/sprites/RessourcesProjet/arbre.jpg"));
 }
+
+Arbre::~Arbre()
+{
+
+}

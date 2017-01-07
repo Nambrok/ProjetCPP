@@ -6,6 +6,7 @@ class Roche : public Obstacle
 {
 public:
     Roche();
+    ~Roche();
 };
 
 #endif // ROCHE_H

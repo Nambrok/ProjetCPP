@@ -10,6 +10,7 @@ public:
     Joueur(Tank *newTank);
     Tank *getTank() const;
     void setTank(Tank *value);
+    ~Joueur();
 };
 
 #endif // JOUEUR_H

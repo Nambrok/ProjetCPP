@@ -6,6 +6,7 @@ class TerrainNormal : public Obstacle
 {
 public:
     TerrainNormal();
+    ~TerrainNormal();
 };
 
 #endif // TERRAINNORMAL_H

@@ -60,3 +60,19 @@ void Terrain::setTerrainNormal(int i, int j)
     delete ter[i][j];
     ter[i][j] = new TerrainNormal();
 }
+
+void Terrain::setResistanceCase(int i, int j, int valeurAEnlever)
+{
+    ter[i][j]->setResistance(ter[i][j]->getResistance() - valeurAEnlever);
+}
+
+Terrain::~Terrain()
+{
+    for(int i = 0; i<NMAX; i++){
+       for(int j = 0; j<NMAX; j++){
+           delete ter[i][j];
+       }
+    }
+    delete j1;
+    delete j2;
+}

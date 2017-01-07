@@ -27,6 +27,9 @@ public:
     Joueur* getJ2();
 
     void setTerrainNormal(int i, int j);
+    void setResistanceCase(int i, int j, int valeurAEnlever);
+
+    ~Terrain();
 };
 
 #endif // TERRAIN_H

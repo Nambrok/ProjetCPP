@@ -6,6 +6,7 @@ class Arbre : public Obstacle
 {
 public:
     Arbre();
+    ~Arbre();
 };
 
 #endif // ARBRE_H

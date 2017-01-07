@@ -6,6 +6,8 @@ class Crevasse : public Obstacle
 {
 public:
     Crevasse();
+    ~Crevasse();
 };
+
 
 #endif // CREVASSE_H

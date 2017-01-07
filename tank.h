@@ -58,6 +58,8 @@ public:
     void setHorizon(int value);
     int getAngleDeTir() const;
     void setAngleDeTir(int value);
+
+    ~Tank();
 };
 
 #endif // TANK_H

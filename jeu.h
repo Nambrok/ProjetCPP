@@ -56,14 +56,19 @@ private:
 public:
     Jeu(int L, int C);
     void chargerTerrain();
+    void mettreAJourTerrain();
     void afficherTankInit(Joueur *j1, Joueur *j2);
     void mettreAJourTank();
     int getTour();
     void setTour(int newTour);
     void choisirTankActuel();
 
+    void destructionTerrain(Projectile* tir);
+
     int getTypeProjectileSelected() const;
     void setTypeProjectileSelected(int value);
+
+    ~Jeu();
 
 signals:
     void changementTour(int tour);

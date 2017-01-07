@@ -52,3 +52,7 @@ void Obstacle::setTexture(QPixmap *newTexture)
 {
     texture = newTexture;
 }
+
+Obstacle::~Obstacle(){
+    delete texture;
+}
