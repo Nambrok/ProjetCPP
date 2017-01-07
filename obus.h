@@ -14,7 +14,14 @@ private:
     QPixmap *texture;
     QPoint impact;
 public:
-    Obus();
-    Obus(int type);//degat
+    Obstacle();
+    void setDegats(int newDmg);
+    int getRadius();
+    int getDegats();
+    QColor getCouleur();
+    void setCouleur(QColor newCouleur);
+    QPixmap getTexture();
 
+protected:
+    void setTexture(QPixmap *newTexture);
 #endif // OBUS_H
