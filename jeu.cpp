@@ -130,6 +130,9 @@ Jeu::Jeu(int L, int C) : QGraphicsView()
     QRadioButton *radio2 = new QRadioButton(tr("Missile"));
     QRadioButton *radio3 = new QRadioButton(tr("Nuke"));
     radio1->setChecked(true);
+    radio1->setPalette(fondblanc);
+    radio2->setPalette(fondblanc);
+    radio3->setPalette(fondblanc);
 
     proxy = scene->addWidget(radio1);
     proxy->setPos(LMaxTerrain, 0);

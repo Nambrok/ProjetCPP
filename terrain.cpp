@@ -21,7 +21,7 @@ Terrain::Terrain(){
         for(int j = 0; j<NMAX; j++){
             switch (rand() % 15) {
                          case 0:
-                            ter[i][j] = new Obus();
+                            ter[i][j] = new Arbre();
                             break;
                          case 1:
                             ter[i][j] = new Crevasse();

@@ -6,6 +6,9 @@
 #include <QPixmap>
 #include <QPoint>
 #include <random>
+#include <vector>
+#include <projectile.h>
+#include <obus.h>
 
 class Tank
 {
@@ -22,12 +25,13 @@ private:
     QPixmap * textureBas;
     QPixmap * textureGauche;
     QPixmap * textureDroite;
+
 public:
     Tank();
     bool isAlive();
-    bool useObus1();
-    bool useObus2();
-    bool useObus3();
+    Projectile *useObus1(QPoint posTank, QPoint dir, int puis);
+    Projectile *useObus2(QPoint posTank, QPoint dir, int puis);
+    Projectile *useObus3(QPoint posTank, QPoint dir, int puis);
     int getNbObus2() const;
     int getNbObus3() const;
 

@@ -6,13 +6,14 @@
 class Projectile
 {
 private:
-    int pointImpact;
+    QPoint pointImpact;
+protected:
     int tailleImpact;
 public:
     Projectile(QPoint point, QPoint direction, int puissance);
 
-    int getPointImpact() const;
-    virtual int getTailleImpact();
+    QPoint getPointImpact() const;
+    int getTailleImpact();
     void setTailleImpact(int value);
 };
 

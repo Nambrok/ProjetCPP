@@ -23,6 +23,7 @@
 #include <QRadioButton>
 
 #include <QKeyEvent>
+#include <time.h>
 
 
 #include "terrain.h"
