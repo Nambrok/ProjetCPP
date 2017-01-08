@@ -166,7 +166,7 @@ Jeu::Jeu(int L, int C) : QGraphicsView()
     const int angleMax = NMAX/3; //angleMax définit le maximum que peut atteindre les tirs des chars
     QSlider * slideAngle = new QSlider(Qt::Vertical);
     slideAngle->setPalette(fondblanc);
-    slideAngle->setRange(0, angleMax);
+    slideAngle->setRange(1, angleMax);
     QObject::connect(slideAngle, SIGNAL(valueChanged(int)), this, SLOT(changerAngleTirActuel(int)));
     proxy = scene->addWidget(slideAngle);
     proxy->setPos(LMaxTerrain + slideAngle->width(), C*0.60);
@@ -403,7 +403,7 @@ void Jeu::tirer()
 void Jeu::destructionTerrain(Projectile *tir){
     QPoint pointImpact = tir->getPointImpact();
     int tailleImpact = tir->getTailleImpact();
-    int valeurAEnlever = 10;
+    int valeurAEnlever = 1;
 
     if(tailleImpact == 1){
         verifierImpact(tir->getPointImpact(), valeurAEnlever);
@@ -411,6 +411,7 @@ void Jeu::destructionTerrain(Projectile *tir){
         qDebug()<< "Jeu::destructionTerrain : Case a endommager " << pointImpact.x() << " " << pointImpact.y();
     }
     else if(tailleImpact == 3){
+        valeurAEnlever = 3;
         verifierImpact(pointImpact, valeurAEnlever);
         verifierImpact(QPoint(pointImpact.x()+1, pointImpact.y()), valeurAEnlever);
         verifierImpact(QPoint(pointImpact.x(), pointImpact.y()-1), valeurAEnlever);
@@ -427,6 +428,7 @@ void Jeu::destructionTerrain(Projectile *tir){
         verifierImpact(QPoint(pointImpact.x()-1, pointImpact.y()-1), valeurAEnlever);
     }
     else if(tailleImpact == 5){
+        valeurAEnlever = 10;
         verifierImpact(pointImpact, valeurAEnlever);
         verifierImpact(QPoint(pointImpact.x()+1, pointImpact.y()), valeurAEnlever);
         verifierImpact(QPoint(pointImpact.x(), pointImpact.y()-1), valeurAEnlever);
