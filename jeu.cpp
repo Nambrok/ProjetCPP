@@ -320,14 +320,28 @@ void Jeu::tirer()
 
 void Jeu::destructionTerrain(Projectile *tir){
     QPoint pointImpact = tir->getPointImpact();
-    int tailleImpact = tir->getTailleImpact();
+//    int tailleImpact = tir->getTailleImpact();
+    int tailleImpact = 2;
     int valeurAEnlever = 10;
 
     if(tailleImpact == 1){
         ter.setResistanceCase(tir->getPointImpact(), valeurAEnlever);
         qDebug()<< "Jeu::destructionTerrain : Point d'Impact de tir :" << pointImpact;
         qDebug()<< "Jeu::destructionTerrain : Case a endommager " << pointImpact.x()/NMAX << " " << pointImpact.y()/NMAX;
-
+    }
+    else{
+        QPoint tmp = tir->getPointImpact();
+        ter.setResistanceCase(tmp, valeurAEnlever);
+        for(int i = 1; i<tailleImpact; i++){
+            for(int j = 1; j<tailleImpact; j++){
+                if(tmp.x() > 0 && tmp.y()>0){
+                    ter.setResistanceCase(QPoint(-tmp.x(), tmp.y()), valeurAEnlever);
+                    ter.setResistanceCase(QPoint(-tmp.x(), -tmp.y()), valeurAEnlever);
+                    ter.setResistanceCase(QPoint(tmp.x(), -tmp.y()), valeurAEnlever);
+                    ter.setResistanceCase(tmp, valeurAEnlever);
+                }
+            }
+        }
     }
 
 }
