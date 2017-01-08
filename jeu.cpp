@@ -153,7 +153,7 @@ Jeu::Jeu(int L, int C) : QGraphicsView()
     //Gestion du facteur horizontal du tank
     QSlider * slideHorizon = new QSlider(Qt::Horizontal);
     slideHorizon->setPalette(fondblanc);
-    slideHorizon->setRange(0, 360);
+    slideHorizon->setRange(0, 4);
     QObject::connect(slideHorizon, SIGNAL(sliderMoved(int)), this, SLOT(changerHorizonTankActuel(int)));
     proxy = scene->addWidget(slideHorizon);
     proxy->setPos(LMaxTerrain + ((L - LMaxTerrain)/2) - (slideHorizon->width()/2), C*0.50+nbTour->height());
@@ -304,14 +304,14 @@ void Jeu::changerAngleTirActuel(int newA){
 
 void Jeu::tirer()
 {
-    Projectile* tir = tankActuel->useObus1(tankActuel->getAdd(), tankActuel->getOrientation(), tankActuel->getAngleDeTir());
+    Projectile* tir = tankActuel->useObus1(tankActuel->getAdd(), tankActuel->getHorizon(), tankActuel->getAngleDeTir());
     QGraphicsPixmapItem *t = scene->addPixmap(tir->getTexture()->scaled(LMaxTerrain/NMAX/5, CMaxTerrain/NMAX/5));
     t->setZValue(1);
     QPoint pos((tir->getPointImpact().x() * LMaxTerrain/NMAX)+LMaxTerrain/NMAX/2, (tir->getPointImpact().y() * CMaxTerrain/NMAX)+CMaxTerrain/NMAX/2);
     t->setPos(pos);
-    //qDebug()<<"Jeu::tirer : tankActuel : Horizon :" << tankActuel->getHorizon() << " Angle : " << tankActuel->getAngleDeTir();
-    //qDebug()<< "Jeu::tirer : Point d'impact de tir : " << tir->getPointImpact();
-    //qDebug() << tir->getTailleImpact();
+    qDebug()<<"Jeu::tirer : tankActuel : Horizon :" << tankActuel->getHorizon() << " Angle : " << tankActuel->getAngleDeTir();
+    qDebug()<< "Jeu::tirer : Point d'impact de tir : " << tir->getPointImpact();
+    qDebug() << "Jeu::tirer : tailleImpact : " << tir->getTailleImpact();
 
     destructionTerrain(tir);
     mettreAJourTerrain();
@@ -320,8 +320,7 @@ void Jeu::tirer()
 
 void Jeu::destructionTerrain(Projectile *tir){
     QPoint pointImpact = tir->getPointImpact();
-//    int tailleImpact = tir->getTailleImpact();
-    int tailleImpact = 2;
+    int tailleImpact = tir->getTailleImpact();
     int valeurAEnlever = 10;
 
     if(tailleImpact == 1){
