@@ -44,31 +44,31 @@ Projectile::Projectile(QPoint point, int direction, int puissance)
         //haut
         dx = 0; dy = -1;
         break;
-    case 1:
+    case -2:
         //gauche
         dx = -1; dy = 0;
         break;
-    case 2:
+    case 4:
         //bas
         dx = 0; dy = 1;
         break;
-    case 3:
+    case 2:
         //droite
         dx = 1; dy = 0;
         break;
-    case 4:
+    case -1:
         //hautgauche
         dx = -1; dy = -1;
         break;
-    case 5:
+    case -3:
         //basgauche
         dx = -1; dy = 1;
         break;
-    case 6:
+    case 1:
         //hautdroite
         dx = 1; dy = -1;
         break;
-    case 7:
+    case 3:
         //basdroite
         dx = 1; dy = 1;
         break;
@@ -76,14 +76,6 @@ Projectile::Projectile(QPoint point, int direction, int puissance)
         break;
     }
 
-    /*Haut : dx = 0; dy = -1; 0
-    Gauche : dx = -1; dy = 0; 1
-    Bas : dx = 0; dy = 1; 2
-    Droite : dx = 1; dy = 0; 3
-    HautGauche : -1, -1 4
-    BasGauche : -1, 1 5
-    HautDroite : 1, -1 6
-    BasDroite : 1, 1 7*/
     QPoint dir(dx, dy);
     qDebug() << "Direction du projectile : "<<dir;
     for(int i = 0; i<puissance; i++){
@@ -91,13 +83,14 @@ Projectile::Projectile(QPoint point, int direction, int puissance)
     }
     if(tmp.x()<0){
         qDebug() << "Tir en dehors x";
+        pointImpact = QPoint(100, 100);
     }
     else{
         pointImpact = tmp;
     }
     if(tmp.y()<0){
         qDebug() << "Tir en dehors y";
-        pointImpact = point;
+        pointImpact = QPoint(100, 100);
     }
     else{
         pointImpact = tmp;

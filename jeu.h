@@ -74,8 +74,10 @@ public:
     void setTypeProjectileSelected(int value);
 
     QPoint identifierCase(QPoint p);
+    void verifierImpact(QPoint p, int valeurAEnlever);
 
     ~Jeu();
+
 
 signals:
     void changementTour(int tour);

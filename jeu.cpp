@@ -155,7 +155,7 @@ Jeu::Jeu(int L, int C) : QGraphicsView()
     //Gestion du facteur horizontal du tank
     QSlider * slideHorizon = new QSlider(Qt::Horizontal);
     slideHorizon->setPalette(fondblanc);
-    slideHorizon->setRange(-3, 3);
+    slideHorizon->setRange(-3, 4);
     QObject::connect(slideHorizon, SIGNAL(sliderMoved(int)), this, SLOT(changerHorizonTankActuel(int)));
     proxy = scene->addWidget(slideHorizon);
     proxy->setPos(LMaxTerrain + ((L - LMaxTerrain)/2) - (slideHorizon->width()/2), C*0.50+nbTour->height());
@@ -338,11 +338,19 @@ void Jeu::changerTour()
     emit changementNbMissile(tankActuel->getNbObus2());
     emit changementNbNuke(tankActuel->getNbObus3());
     emit changementTour(tour);
+    if(!ter.getJ1()->getTank()->isAlive()){
+        qDebug() << "Victoire Joueur 2";
+        exit(0);
+    }
+    else if(!ter.getJ2()->getTank()->isAlive()){
+        qDebug() << "Victore Joueur 1";
+        exit(0); //ICI il faudra appeller la fonction de victoire
+    }
 }
 
 void Jeu::changerHorizonTankActuel(int newH)
 {
-    tankActuel->setHorizon(newH+3);
+    tankActuel->setHorizon(newH);
 }
 
 void Jeu::changerAngleTirActuel(int newA){
@@ -369,23 +377,26 @@ void Jeu::tirer()
 {
     Projectile* tir = tankActuel->useProjectile(tankActuel->getAdd(), tankActuel->getHorizon(), tankActuel->getAngleDeTir(), getTypeProjectileSelected());
     if(tir != NULL){
-        if(getTypeProjectileSelected() == 1){
+        if(getTypeProjectileSelected() == T_MISSILE){
             emit changementNbMissile(tankActuel->getNbObus2());
         }
-        else if(getTypeProjectileSelected() == 2){
+        else if(getTypeProjectileSelected() == T_NUKE){
             emit changementNbNuke(tankActuel->getNbObus3());
         }
-        QGraphicsPixmapItem *t = scene->addPixmap(tir->getTexture()->scaled(LMaxTerrain/NMAX/5, CMaxTerrain/NMAX/5));
-        t->setZValue(1);
-        QPoint pos((tir->getPointImpact().x() * LMaxTerrain/NMAX)+LMaxTerrain/NMAX/2, (tir->getPointImpact().y() * CMaxTerrain/NMAX)+CMaxTerrain/NMAX/2);
-        t->setPos(pos);
-        qDebug()<<"Jeu::tirer : tankActuel : Horizon :" << tankActuel->getHorizon() << " Angle : " << tankActuel->getAngleDeTir();
-        qDebug()<< "Jeu::tirer : Point d'impact de tir : " << tir->getPointImpact();
-        qDebug() << "Jeu::tirer : tailleImpact : " << tir->getTailleImpact();
-        destructionTerrain(tir);
-        mettreAJourTerrain();
+        if(tir->getPointImpact() != QPoint(100, 100)){
+
+            QGraphicsPixmapItem *t = scene->addPixmap(tir->getTexture()->scaled(LMaxTerrain/NMAX/5, CMaxTerrain/NMAX/5));
+            t->setZValue(1);
+            QPoint pos((tir->getPointImpact().x() * LMaxTerrain/NMAX)+LMaxTerrain/NMAX/2, (tir->getPointImpact().y() * CMaxTerrain/NMAX)+CMaxTerrain/NMAX/2);
+            t->setPos(pos);
+            qDebug()<<"Jeu::tirer : tankActuel : Horizon :" << tankActuel->getHorizon() << " Angle : " << tankActuel->getAngleDeTir();
+            qDebug()<< "Jeu::tirer : Point d'impact de tir : " << tir->getPointImpact();
+            qDebug() << "Jeu::tirer : tailleImpact : " << tir->getTailleImpact();
+            destructionTerrain(tir);
+            mettreAJourTerrain();
+            changerTour();
+        }
         delete tir;
-        changerTour();
     }
 }
 
@@ -395,55 +406,66 @@ void Jeu::destructionTerrain(Projectile *tir){
     int valeurAEnlever = 10;
 
     if(tailleImpact == 1){
-        ter.setResistanceCase(tir->getPointImpact(), valeurAEnlever);
-        ter.tankPresent(tir->getPointImpact());
+        verifierImpact(tir->getPointImpact(), valeurAEnlever);
         qDebug()<< "Jeu::destructionTerrain : Point d'Impact de tir :" << pointImpact;
         qDebug()<< "Jeu::destructionTerrain : Case a endommager " << pointImpact.x() << " " << pointImpact.y();
     }
-    else if(tailleImpact == 2){
-        ter.setResistanceCase(pointImpact, valeurAEnlever);
-        ter.tankPresent(tir->getPointImpact());
-        ter.setResistanceCase(QPoint(pointImpact.x()+1, pointImpact.y()), valeurAEnlever);
-        ter.tankPresent(tir->getPointImpact());
-        ter.setResistanceCase(QPoint(pointImpact.x(), pointImpact.y()-1), valeurAEnlever);
-        ter.tankPresent(tir->getPointImpact());
-        ter.setResistanceCase(QPoint(pointImpact.x()-1, pointImpact.y()), valeurAEnlever);
-        ter.tankPresent(tir->getPointImpact());
-        ter.setResistanceCase(QPoint(pointImpact.x(), pointImpact.y()+1), valeurAEnlever);
-        ter.tankPresent(tir->getPointImpact());
-    }
     else if(tailleImpact == 3){
-        ter.setResistanceCase(pointImpact, valeurAEnlever);
-        ter.tankPresent(tir->getPointImpact());
-        ter.setResistanceCase(QPoint(pointImpact.x()+1, pointImpact.y()), valeurAEnlever);
-        ter.tankPresent(tir->getPointImpact());
-        ter.setResistanceCase(QPoint(pointImpact.x(), pointImpact.y()-1), valeurAEnlever);
-        ter.tankPresent(tir->getPointImpact());
-        ter.setResistanceCase(QPoint(pointImpact.x()-1, pointImpact.y()), valeurAEnlever);
-        ter.tankPresent(tir->getPointImpact());
-        ter.setResistanceCase(QPoint(pointImpact.x(), pointImpact.y()+1), valeurAEnlever);
-        ter.tankPresent(tir->getPointImpact());
-        ter.setResistanceCase(QPoint(pointImpact.x(), pointImpact.y()-2), valeurAEnlever);
-        ter.tankPresent(tir->getPointImpact());
-        ter.setResistanceCase(QPoint(pointImpact.x(), pointImpact.y()), valeurAEnlever);
-        ter.tankPresent(tir->getPointImpact());
-        ter.setResistanceCase(QPoint(pointImpact.x()+1, pointImpact.y()-1), valeurAEnlever);
-        ter.tankPresent(tir->getPointImpact());
-        ter.setResistanceCase(QPoint(pointImpact.x()+2, pointImpact.y()), valeurAEnlever);
-        ter.tankPresent(tir->getPointImpact());
-        ter.setResistanceCase(QPoint(pointImpact.x()+1, pointImpact.y()+1), valeurAEnlever);
-        ter.tankPresent(tir->getPointImpact());
-        ter.setResistanceCase(QPoint(pointImpact.x(), pointImpact.y()+2), valeurAEnlever);
-        ter.tankPresent(tir->getPointImpact());
-        ter.setResistanceCase(QPoint(pointImpact.x()-1, pointImpact.y()+1), valeurAEnlever);
-        ter.tankPresent(tir->getPointImpact());
-        ter.setResistanceCase(QPoint(pointImpact.x()-2, pointImpact.y()), valeurAEnlever);
-        ter.tankPresent(tir->getPointImpact());
-        ter.setResistanceCase(QPoint(pointImpact.x()-1, pointImpact.y()-1), valeurAEnlever);
-        ter.tankPresent(tir->getPointImpact());
+        verifierImpact(pointImpact, valeurAEnlever);
+        verifierImpact(QPoint(pointImpact.x()+1, pointImpact.y()), valeurAEnlever);
+        verifierImpact(QPoint(pointImpact.x(), pointImpact.y()-1), valeurAEnlever);
+        verifierImpact(QPoint(pointImpact.x()-1, pointImpact.y()), valeurAEnlever);
+        verifierImpact(QPoint(pointImpact.x(), pointImpact.y()+1), valeurAEnlever);
+        verifierImpact(QPoint(pointImpact.x(), pointImpact.y()-2), valeurAEnlever);
+        verifierImpact(QPoint(pointImpact.x(), pointImpact.y()), valeurAEnlever);
+        verifierImpact(QPoint(pointImpact.x()+1, pointImpact.y()-1), valeurAEnlever);
+        verifierImpact(QPoint(pointImpact.x()+2, pointImpact.y()), valeurAEnlever);
+        verifierImpact(QPoint(pointImpact.x()+1, pointImpact.y()+1), valeurAEnlever);
+        verifierImpact(QPoint(pointImpact.x(), pointImpact.y()+2), valeurAEnlever);
+        verifierImpact(QPoint(pointImpact.x()-1, pointImpact.y()+1), valeurAEnlever);
+        verifierImpact(QPoint(pointImpact.x()-2, pointImpact.y()), valeurAEnlever);
+        verifierImpact(QPoint(pointImpact.x()-1, pointImpact.y()-1), valeurAEnlever);
+    }
+    else if(tailleImpact == 5){
+        verifierImpact(pointImpact, valeurAEnlever);
+        verifierImpact(QPoint(pointImpact.x()+1, pointImpact.y()), valeurAEnlever);
+        verifierImpact(QPoint(pointImpact.x(), pointImpact.y()-1), valeurAEnlever);
+        verifierImpact(QPoint(pointImpact.x()-1, pointImpact.y()), valeurAEnlever);
+        verifierImpact(QPoint(pointImpact.x(), pointImpact.y()+1), valeurAEnlever);
+        verifierImpact(QPoint(pointImpact.x(), pointImpact.y()-2), valeurAEnlever);
+        verifierImpact(QPoint(pointImpact.x(), pointImpact.y()), valeurAEnlever);
+        verifierImpact(QPoint(pointImpact.x()+1, pointImpact.y()-1), valeurAEnlever);
+        verifierImpact(QPoint(pointImpact.x()+2, pointImpact.y()), valeurAEnlever);
+        verifierImpact(QPoint(pointImpact.x()+1, pointImpact.y()+1), valeurAEnlever);
+        verifierImpact(QPoint(pointImpact.x(), pointImpact.y()+2), valeurAEnlever);
+        verifierImpact(QPoint(pointImpact.x()-1, pointImpact.y()+1), valeurAEnlever);
+        verifierImpact(QPoint(pointImpact.x()-2, pointImpact.y()), valeurAEnlever);
+        verifierImpact(QPoint(pointImpact.x()-1, pointImpact.y()-1), valeurAEnlever);
+
+        verifierImpact(QPoint(pointImpact.x()+3, pointImpact.y()), valeurAEnlever);
+        verifierImpact(QPoint(pointImpact.x()-3, pointImpact.y()), valeurAEnlever);
+        verifierImpact(QPoint(pointImpact.x(), pointImpact.y()-3), valeurAEnlever);
+        verifierImpact(QPoint(pointImpact.x(), pointImpact.y()+3), valeurAEnlever);
+
+        verifierImpact(QPoint(pointImpact.x()-2, pointImpact.y()+1), valeurAEnlever);
+        verifierImpact(QPoint(pointImpact.x()-1, pointImpact.y()+2), valeurAEnlever);
+        verifierImpact(QPoint(pointImpact.x()+1, pointImpact.y()+2), valeurAEnlever);
+        verifierImpact(QPoint(pointImpact.x()+2, pointImpact.y()+1), valeurAEnlever);
+        verifierImpact(QPoint(pointImpact.x()-2, pointImpact.y()-1), valeurAEnlever);
+        verifierImpact(QPoint(pointImpact.x()-1, pointImpact.y()-2), valeurAEnlever);
+        verifierImpact(QPoint(pointImpact.x()+1, pointImpact.y()-2), valeurAEnlever);
+        verifierImpact(QPoint(pointImpact.x()+2, pointImpact.y()-1), valeurAEnlever);
+
     }
 
 }
+
+
+void Jeu::verifierImpact(QPoint p, int valeurAEnlever){
+    ter.setResistanceCase(p, valeurAEnlever);
+    ter.tankPresent(p);
+}
+
 
 Jeu::~Jeu(){
     delete scene;

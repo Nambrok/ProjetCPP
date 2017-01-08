@@ -2,7 +2,7 @@
 
 Missile::Missile(QPoint point, int direction, int puissance) : Projectile(point, direction, puissance)
 {
-    setTailleImpact(2);
+    setTailleImpact(3);
     setTexture(new QPixmap(":sprites/RessourcesProjet/missile.png"));
 
 }
