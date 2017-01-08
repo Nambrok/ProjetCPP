@@ -338,7 +338,7 @@ void Jeu::selectNukeType(){
 
 void Jeu::tirer()
 {
-    Projectile* tir = tankActuel->useObus1(tankActuel->getAdd(), tankActuel->getHorizon(), tankActuel->getAngleDeTir());
+    Projectile* tir = tankActuel->useObus(tankActuel->getAdd(), tankActuel->getHorizon(), tankActuel->getAngleDeTir(), getTypeProjectileSelected());
     QGraphicsPixmapItem *t = scene->addPixmap(tir->getTexture()->scaled(LMaxTerrain/NMAX/5, CMaxTerrain/NMAX/5));
     t->setZValue(1);
     QPoint pos((tir->getPointImpact().x() * LMaxTerrain/NMAX)+LMaxTerrain/NMAX/2, (tir->getPointImpact().y() * CMaxTerrain/NMAX)+CMaxTerrain/NMAX/2);
