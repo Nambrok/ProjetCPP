@@ -17,7 +17,7 @@ class Tank
 {
 private:
     int horizon; //Angle du canon horizontalement de 0 à 360°
-    int angleDeTir; //0 à 90°
+    int angleDeTir;
     int capacite; //capacité de déplacement restant au tank initialisé à L/10
     int nbObus2 = NBOBUS2;
     int nbObus3 = NBOBUS3;
