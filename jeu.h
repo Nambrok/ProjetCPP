@@ -38,6 +38,7 @@
 #include "tank.h"
 #include "terrainnormal.h"
 #include "joueur.h"
+#include "victoire.h"
 
 #include <QDebug>
 
@@ -66,7 +67,6 @@ public:
     void mettreAJourTank();
     int getTour();
     void setTour(int newTour);
-    void choisirTankActuel();
 
     void destructionTerrain(Projectile* tir);
 
@@ -75,6 +75,8 @@ public:
 
     QPoint identifierCase(QPoint p);
     void verifierImpact(QPoint p, int valeurAEnlever);
+
+    void victoire(int joueurGagnant);
 
     ~Jeu();
 

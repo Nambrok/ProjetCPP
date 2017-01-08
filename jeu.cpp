@@ -340,11 +340,11 @@ void Jeu::changerTour()
     emit changementTour(tour);
     if(!ter.getJ1()->getTank()->isAlive()){
         qDebug() << "Victoire Joueur 2";
-        exit(0);
+        victoire(J2);
     }
     else if(!ter.getJ2()->getTank()->isAlive()){
         qDebug() << "Victore Joueur 1";
-        exit(0); //ICI il faudra appeller la fonction de victoire
+        victoire(J1);
     }
 }
 
@@ -464,6 +464,12 @@ void Jeu::destructionTerrain(Projectile *tir){
 void Jeu::verifierImpact(QPoint p, int valeurAEnlever){
     ter.setResistanceCase(p, valeurAEnlever);
     ter.tankPresent(p);
+}
+
+void Jeu::victoire(int joueurGagnant)
+{
+    this->setScene(new Victoire(joueurGagnant));
+    setAlignment(Qt::AlignCenter);
 }
 
 
