@@ -55,6 +55,8 @@ private:
     QGraphicsPixmapItem *imgTankActuel;
     void keyPressEvent(QKeyEvent *event);
     int typeProjectileSelected;//0 obus, 1 missile, 2 nuke
+    QGraphicsRectItem * affTourCoul;
+
 
 public:
     Jeu(int L, int C);

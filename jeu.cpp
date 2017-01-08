@@ -119,6 +119,8 @@ Jeu::Jeu(int L, int C) : QGraphicsView()
     QBrush background(QColor(169, 89, 30));
     QPalette fondblanc(Qt::black, Qt::white);
 
+    QBrush colJ1(Qt::blue);
+    QBrush colJ2(Qt::red);
 
 
     QGraphicsRectItem * rect = scene->addRect(0, 0, LMaxTerrain, CMaxTerrain);
@@ -202,7 +204,9 @@ Jeu::Jeu(int L, int C) : QGraphicsView()
     proxy = scene->addWidget(selectNuke);
     proxy->setPos(LMaxTerrain, selectMissile->height() + selectObus->height());
 
-
+    affTourCoul = scene->addRect(0, 0, 20, 10);
+    affTourCoul->setPos(LMaxTerrain + ((L - LMaxTerrain)/2) - 10, C*0.30);
+    affTourCoul->setBrush(colJ1);
 
     QPushButton * tirer = new QPushButton("Tirer");
     proxy = scene->addWidget(tirer);
@@ -313,23 +317,28 @@ void Jeu::setTour(int newTour)
 void Jeu::changerTour()
 {
     tour += 1;
+    QBrush colJ1(Qt::blue);
+    QBrush colJ2(Qt::red);
     if(getTour() == J1){
         tankActuel = ter.getJ1()->getTank();
         tankActuel->setAngleDeTir(ter.getJ2()->getTank()->getAngleDeTir());
         //On met à jour angleDeTir et l'Horizon du tank qui prend le tour car sinon il sont à l'ancienne donné si on ne touche pas aux sliders.
         tankActuel->setHorizon(ter.getJ2()->getTank()->getHorizon());
         imgTankActuel = tank1;
+        affTourCoul->setBrush(colJ1);
     }
     else if(getTour() == J2){
         tankActuel = ter.getJ2()->getTank();
         imgTankActuel = tank2;
         tankActuel->setAngleDeTir(ter.getJ1()->getTank()->getAngleDeTir());
         tankActuel->setHorizon(ter.getJ1()->getTank()->getHorizon());
+        affTourCoul->setBrush(colJ2);
     }
     tankActuel->setCapacite(NMAX/10);
     emit changementNbMissile(tankActuel->getNbObus2());
     emit changementNbNuke(tankActuel->getNbObus3());
     emit changementTour(tour);
+
 }
 
 void Jeu::changerHorizonTankActuel(int newH)
