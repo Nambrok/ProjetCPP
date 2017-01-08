@@ -350,6 +350,7 @@ void Jeu::tirer()
     destructionTerrain(tir);
     mettreAJourTerrain();
     delete tir;
+    changerTour();
 }
 
 void Jeu::destructionTerrain(Projectile *tir){
