@@ -476,9 +476,6 @@ void Jeu::victoire(int joueurGagnant)
 
 
 Jeu::~Jeu(){
-    delete scene;
-    delete tank1;
-    delete tank2;
-    delete imgTankActuel;
+
 }
 
