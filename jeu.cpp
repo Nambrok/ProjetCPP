@@ -156,6 +156,7 @@ Jeu::Jeu(int L, int C) : QGraphicsView()
     QSlider * slideHorizon = new QSlider(Qt::Horizontal);
     slideHorizon->setPalette(fondblanc);
     slideHorizon->setRange(-3, 4);
+    slideHorizon->setPageStep(1);
     QObject::connect(slideHorizon, SIGNAL(sliderMoved(int)), this, SLOT(changerHorizonTankActuel(int)));
     proxy = scene->addWidget(slideHorizon);
     proxy->setPos(LMaxTerrain + ((L - LMaxTerrain)/2) - (slideHorizon->width()/2), C*0.50+nbTour->height());
@@ -167,6 +168,7 @@ Jeu::Jeu(int L, int C) : QGraphicsView()
     QSlider * slideAngle = new QSlider(Qt::Vertical);
     slideAngle->setPalette(fondblanc);
     slideAngle->setRange(1, angleMax);
+    slideAngle->setPageStep(1);
     QObject::connect(slideAngle, SIGNAL(valueChanged(int)), this, SLOT(changerAngleTirActuel(int)));
     proxy = scene->addWidget(slideAngle);
     proxy->setPos(LMaxTerrain + slideAngle->width(), C*0.60);
@@ -473,9 +475,3 @@ void Jeu::victoire(int joueurGagnant)
     this->setScene(new Victoire(joueurGagnant));
     setAlignment(Qt::AlignCenter);
 }
-
-
-Jeu::~Jeu(){
-
-}
-

@@ -78,9 +78,6 @@ public:
 
     void victoire(int joueurGagnant);
 
-    ~Jeu();
-
-
 signals:
     void changementTour(int tour);
     void fermeture();
