@@ -153,7 +153,7 @@ Jeu::Jeu(int L, int C) : QGraphicsView()
     //Gestion du facteur horizontal du tank
     QSlider * slideHorizon = new QSlider(Qt::Horizontal);
     slideHorizon->setPalette(fondblanc);
-    slideHorizon->setRange(0, 3);
+    slideHorizon->setRange(0, 7);
     QObject::connect(slideHorizon, SIGNAL(sliderMoved(int)), this, SLOT(changerHorizonTankActuel(int)));
     proxy = scene->addWidget(slideHorizon);
     proxy->setPos(LMaxTerrain + ((L - LMaxTerrain)/2) - (slideHorizon->width()/2), C*0.50+nbTour->height());
@@ -326,7 +326,6 @@ void Jeu::selectObusType()
 {
     setTypeProjectileSelected(T_OBUS);
     //On donne l'identifiant d'un obus
-
 }
 
 void Jeu::selectMissileType(){

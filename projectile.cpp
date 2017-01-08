@@ -56,9 +56,34 @@ Projectile::Projectile(QPoint point, int direction, int puissance)
         //droite
         dx = 1; dy = 0;
         break;
+    case 4:
+        //hautgauche
+        dx = -1; dy = -1;
+        break;
+    case 5:
+        //basgauche
+        dx = -1; dy = 1;
+        break;
+    case 6:
+        //hautdroite
+        dx = 1; dy = -1;
+        break;
+    case 7:
+        //basdroite
+        dx = 1; dy = 1;
+        break;
     default:
         break;
     }
+
+    /*Haut : dx = 0; dy = -1; 0
+    Gauche : dx = -1; dy = 0; 1
+    Bas : dx = 0; dy = 1; 2
+    Droite : dx = 1; dy = 0; 3
+    HautGauche : -1, -1 4
+    BasGauche : -1, 1 5
+    HautDroite : 1, -1 6
+    BasDroite : 1, 1 7*/
     QPoint dir(dx, dy);
     qDebug() << "Direction du projectile : "<<dir;
     for(int i = 0; i<puissance; i++){
