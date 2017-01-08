@@ -34,7 +34,7 @@ private:
 
 public:
     Tank();
-    bool isAlive();
+
     Projectile *useObus(QPoint posTank, int dir, int puis);
     Projectile *useMissile(QPoint posTank, int dir, int puis);
     Projectile *useNuke(QPoint posTank, int dir, int puis);
@@ -57,6 +57,9 @@ public:
     void setTextureBas(QPixmap* newTexture);
     QPoint getAdd() const;
     void setAdd(const QPoint &value);
+
+    bool isAlive();
+    void setDead();
 
     void moveBy(int dx, int dy);
     int getHorizon() const;

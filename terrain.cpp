@@ -55,6 +55,16 @@ Joueur *Terrain::getJ2()
     return j2;
 }
 
+void Terrain::tankPresent(QPoint p)
+{
+    if(j1->getTank()->getAdd() == p){
+        j1->getTank()->setDead();
+    }
+    if(j2->getTank()->getAdd() == p){
+        j2->getTank()->setDead();
+    }
+}
+
 void Terrain::setTerrainNormal(int i, int j)
 {
     delete ter[i][j];

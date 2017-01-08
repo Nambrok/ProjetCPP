@@ -25,6 +25,7 @@ public:
     Obstacle* getCase(int i, int j);
     Joueur* getJ1();
     Joueur* getJ2();
+    void tankPresent(QPoint p);
 
     void setTerrainNormal(int i, int j);
     void setResistanceCase(QPoint caseAChanger, int valeurAEnlever);

@@ -146,11 +146,17 @@ Tank::Tank()
     setOrientation(rand()%4);
     setHorizon(0);
     setAngleDeTir(0);
+    alive = true;
 }
 
 bool Tank::isAlive()
 {
     return alive;
+}
+
+void Tank::setDead()
+{
+    alive = false;
 }
 
 Projectile* Tank::useProjectile(QPoint posTank, int dir, int puis, int type){
