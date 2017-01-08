@@ -3,6 +3,9 @@
 
 #define J1 0
 #define J2 1
+#define T_OBUS 0
+#define T_MISSILE 1
+#define T_NUKE 2
 
 #include <QApplication>
 #include <QWidget>
@@ -35,6 +38,7 @@
 #include "tank.h"
 #include "terrainnormal.h"
 #include "joueur.h"
+
 
 #include <QDebug>
 
@@ -81,6 +85,9 @@ public slots:
     void changerHorizonTankActuel(int newH);
     void tirer();
     void changerAngleTirActuel(int newA);
+    void selectObusType();
+    void selectMissileType();
+    void selectNukeType();
 };
 
 #endif // JEU_H

@@ -153,15 +153,32 @@ bool Tank::isAlive()
     return alive;
 }
 
+Projectile* Tank::useObus(QPoint posTank, int dir, int puis, int type){
+    if(type == 0){
+        return useObus1(posTank, dir, puis);
+    }
+    else if(type == 1){
+        return useObus2(posTank, dir, puis);
+    }
+    else if(type == 2){
+        return useObus3(posTank, dir, puis);
+    }
+    else{
+        qDebug()<<"Tank::useObus(QPoint, int dir, int puis, int type) : Type donner inconnu "<<type;
+        return NULL;
+    }
+}
+
 Projectile* Tank::useObus1(QPoint posTank, int dir, int puis)
 {
     return new Obus(posTank, dir, puis);
 }
 
-Projectile* Tank::useObus2(QPoint posTank, QPoint dir, int puis)
+Projectile* Tank::useObus2(QPoint posTank, int dir, int puis)
 {
     if(nbObus2 > 0){
         nbObus2--;
+        return new Missile(posTank, dir, puis);
     }
     else{
         return NULL;
@@ -169,11 +186,11 @@ Projectile* Tank::useObus2(QPoint posTank, QPoint dir, int puis)
     return NULL;
 }
 
-Projectile* Tank::useObus3(QPoint posTank, QPoint dir, int puis)
+Projectile* Tank::useObus3(QPoint posTank, int dir, int puis)
 {
     if(nbObus3 > 0){
         nbObus3--;
-
+        return new Nuke(posTank, dir, puis);
     }
     else{
         return NULL;

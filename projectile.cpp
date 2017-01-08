@@ -72,6 +72,7 @@ Projectile::Projectile(QPoint point, int direction, int puissance)
     }
     if(tmp.y()<0){
         qDebug() << "Tir en dehors y";
+        pointImpact = point;
     }
     else{
         pointImpact = tmp;

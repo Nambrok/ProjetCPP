@@ -1,12 +1,14 @@
 #ifndef NUKE_H
 #define NUKE_H
-#include "projectile.h"
+
+#include <QDebug>
+#include <QPoint>
+#include <projectile.h>
 
 class Nuke : public Projectile
 {
 public:
-    Nuke();
+    Nuke(QPoint point, int direction, int puissance);
 };
-
 
 #endif // NUKE_H

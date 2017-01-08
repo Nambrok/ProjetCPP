@@ -12,7 +12,9 @@ SOURCES += main.cpp \
     roche.cpp \
     joueur.cpp \
     obus.cpp \
-    projectile.cpp
+    projectile.cpp \
+    missile.cpp \
+    nuke.cpp
 
 HEADERS += \
     jeu.h \
@@ -26,7 +28,9 @@ HEADERS += \
     roche.h \
     joueur.h \
     obus.h \
-    projectile.h
+    projectile.h \
+    missile.h \
+    nuke.h
 
 FORMS +=
 

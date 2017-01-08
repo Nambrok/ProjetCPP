@@ -108,7 +108,7 @@ Jeu::Jeu(int L, int C) : QGraphicsView()
     LMaxTerrain = L*0.80;
     CMaxTerrain = C;
     setTour(0);
-    setTypeProjectileSelected(0); // Les obus sont séléctionnés à la création du terrain.
+    setTypeProjectileSelected(T_OBUS); // Les obus sont séléctionnés à la création du terrain.
 
     setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
     setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
@@ -160,15 +160,17 @@ Jeu::Jeu(int L, int C) : QGraphicsView()
     proxy->setGeometry(QRect(LMaxTerrain, C*0.50+nbTour->height(), L - LMaxTerrain, 10));
     //affichage Puissance
 
+    //Gestion de l'angle de tir du tank
+    const int angleMax = NMAX/3; //angleMax définit le maximum que peut atteindre les tirs des chars
     QSlider * slideAngle = new QSlider(Qt::Vertical);
     slideAngle->setPalette(fondblanc);
-    slideAngle->setRange(0, NMAX/3);
+    slideAngle->setRange(0, angleMax);
     QObject::connect(slideAngle, SIGNAL(valueChanged(int)), this, SLOT(changerAngleTirActuel(int)));
     proxy = scene->addWidget(slideAngle);
     proxy->setPos(LMaxTerrain + slideAngle->width(), C*0.60);
 
     //Choix projectile
-    QRadioButton *radio1 = new QRadioButton(tr("Obus"));
+    /*QRadioButton *radio1 = new QRadioButton(tr("Obus"));
     QRadioButton *radio2 = new QRadioButton(tr("Missile"));
     QRadioButton *radio3 = new QRadioButton(tr("Nuke"));
     radio1->setChecked(true);
@@ -182,6 +184,24 @@ Jeu::Jeu(int L, int C) : QGraphicsView()
     proxy->setPos(LMaxTerrain + radio1->width(), 0);
     proxy = scene->addWidget(radio3);
     proxy->setPos(LMaxTerrain + radio1->width() + radio2->width(), 0);
+    *///QGroupButton marche pas dans ce cas là
+
+    QPushButton * selectObus = new QPushButton(tr("Obus"));
+    QPushButton * selectMissile = new QPushButton(tr("Missile"));
+    QPushButton * selectNuke = new QPushButton(tr("Nuke"));
+    selectObus->setPalette(fondblanc);
+    selectMissile->setPalette(fondblanc);
+    selectNuke->setPalette(fondblanc);
+    QObject::connect(selectObus, SIGNAL(clicked(bool)), this, SLOT(selectObusType()));
+    QObject::connect(selectMissile, SIGNAL(clicked(bool)), this, SLOT(selectMissileType()));
+    QObject::connect(selectNuke, SIGNAL(clicked(bool)), this, SLOT(selectNukeType()));
+    proxy = scene->addWidget(selectObus);
+    proxy->setPos(LMaxTerrain, 0);
+    proxy = scene->addWidget(selectMissile);
+    proxy->setPos(LMaxTerrain, selectObus->height());
+    proxy = scene->addWidget(selectNuke);
+    proxy->setPos(LMaxTerrain, selectMissile->height() + selectObus->height());
+
 
 
     QPushButton * tirer = new QPushButton("Tirer");
@@ -300,6 +320,21 @@ void Jeu::changerHorizonTankActuel(int newH)
 
 void Jeu::changerAngleTirActuel(int newA){
     tankActuel->setAngleDeTir(newA);
+}
+
+void Jeu::selectObusType()
+{
+    setTypeProjectileSelected(T_OBUS);
+    //On donne l'identifiant d'un obus
+
+}
+
+void Jeu::selectMissileType(){
+    setTypeProjectileSelected(T_MISSILE);
+}
+
+void Jeu::selectNukeType(){
+    setTypeProjectileSelected(T_NUKE);
 }
 
 void Jeu::tirer()

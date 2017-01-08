@@ -15,5 +15,7 @@
         <file>RessourcesProjet/rougeGauche.png</file>
         <file>RessourcesProjet/rougeHaut.png</file>
         <file>RessourcesProjet/obus.png</file>
+        <file>RessourcesProjet/Missile.png</file>
+        <file>RessourcesProjet/Nuke.png</file>
     </qresource>
 </RCC>
