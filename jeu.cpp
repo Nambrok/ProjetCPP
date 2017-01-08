@@ -107,6 +107,7 @@ Jeu::Jeu(int L, int C) : QGraphicsView()
 
     LMaxTerrain = L*0.80;
     CMaxTerrain = C;
+    setIAActive(true);
     setTour(0);
     setTypeProjectileSelected(T_OBUS); // Les obus sont séléctionnés à la création du terrain.
 
@@ -335,6 +336,11 @@ void Jeu::changerTour()
         tankActuel->setAngleDeTir(ter.getJ1()->getTank()->getAngleDeTir());
         tankActuel->setHorizon(ter.getJ1()->getTank()->getHorizon());
         affTourCoul->setBrush(colJ2);
+        if(isIAActive()){
+            JoueurIA ia(ter.getJ2()->getTank());
+            ia.setTir(ter.getJ1()->getTank());
+            tirer();
+        }
     }
     tankActuel->setCapacite(NMAX/10);
     emit changementNbMissile(tankActuel->getNbObus2());
@@ -474,4 +480,14 @@ void Jeu::victoire(int joueurGagnant)
 {
     this->setScene(new Victoire(joueurGagnant));
     setAlignment(Qt::AlignCenter);
+}
+
+bool Jeu::isIAActive()
+{
+    return IA;
+}
+
+void Jeu::setIAActive(bool b)
+{
+    IA = b;
 }

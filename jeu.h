@@ -39,6 +39,7 @@
 #include "terrainnormal.h"
 #include "joueur.h"
 #include "victoire.h"
+#include "joueuria.h"
 
 #include <QDebug>
 
@@ -57,6 +58,7 @@ private:
     void keyPressEvent(QKeyEvent *event);
     int typeProjectileSelected;//0 obus, 1 missile, 2 nuke
     QGraphicsRectItem * affTourCoul;
+    bool IA;
 
 
 public:
@@ -77,6 +79,9 @@ public:
     void verifierImpact(QPoint p, int valeurAEnlever);
 
     void victoire(int joueurGagnant);
+
+    bool isIAActive();
+    void setIAActive(bool b);
 
 signals:
     void changementTour(int tour);

@@ -15,7 +15,7 @@ Terrain::Terrain(){
     j2->getTank()->setTextureHaut(new QPixmap(":/sprites/RessourcesProjet/rougeHaut.png"));
 
     j1->getTank()->setAdd(QPoint(0,0));
-    j2->getTank()->setAdd(QPoint(10, 10));
+    j2->getTank()->setAdd(QPoint(NMAX, NMAX));
     srand(time(NULL));
     for(int i = 0; i<NMAX; i++){
         for(int j = 0; j<NMAX; j++){

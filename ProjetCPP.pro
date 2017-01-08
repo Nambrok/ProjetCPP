@@ -15,7 +15,8 @@ SOURCES += main.cpp \
     projectile.cpp \
     missile.cpp \
     nuke.cpp \
-    victoire.cpp
+    victoire.cpp \
+    joueuria.cpp
 
 HEADERS += \
     jeu.h \
@@ -32,7 +33,8 @@ HEADERS += \
     projectile.h \
     missile.h \
     nuke.h \
-    victoire.h
+    victoire.h \
+    joueuria.h
 
 FORMS +=
 
