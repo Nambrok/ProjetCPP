@@ -63,7 +63,7 @@ void Terrain::setTerrainNormal(int i, int j)
 
 void Terrain::setResistanceCase(QPoint caseAChanger, int valeurAEnlever)
 {
-    if((caseAChanger.x() >= 0 && caseAChange.x()<NMAX) && (caseAChanger.y() >= 0 && caseAChanger.y()<NMAX)){
+    if((caseAChanger.x() >= 0 && caseAChanger.x()<NMAX) && (caseAChanger.y() >= 0 && caseAChanger.y()<NMAX)){
          if(ter[caseAChanger.x()][caseAChanger.y()]->getIdentifiant() == 0 || ter[caseAChanger.x()][caseAChanger.y()]->getIdentifiant() == 3){
              if(ter[caseAChanger.x()][caseAChanger.y()]->getResistance() - valeurAEnlever <= 0){
                  delete ter[caseAChanger.x()][caseAChanger.y()];

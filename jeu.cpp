@@ -119,6 +119,8 @@ Jeu::Jeu(int L, int C) : QGraphicsView()
     QBrush background(QColor(169, 89, 30));
     QPalette fondblanc(Qt::black, Qt::white);
 
+    QBrush colJ1(Qt::blue);
+    QBrush colJ2(Qt::red);
 
 
     QGraphicsRectItem * rect = scene->addRect(0, 0, LMaxTerrain, CMaxTerrain);
@@ -148,7 +150,7 @@ Jeu::Jeu(int L, int C) : QGraphicsView()
     nbTour->setPalette(fondblanc);
     QObject::connect(this, SIGNAL(changementTour(int)), nbTour, SLOT(display(int)));
     proxy = scene->addWidget(nbTour);
-    proxy->setPos(LMaxTerrain + ((L - LMaxTerrain)/2) - (nbTour->width()/2), C*0.50);;
+    proxy->setPos(LMaxTerrain + ((L - LMaxTerrain)/2) - (nbTour->width()/2), C*0.50);
 
     //Gestion du facteur horizontal du tank
     QSlider * slideHorizon = new QSlider(Qt::Horizontal);
@@ -202,12 +204,28 @@ Jeu::Jeu(int L, int C) : QGraphicsView()
     proxy = scene->addWidget(selectNuke);
     proxy->setPos(LMaxTerrain, selectMissile->height() + selectObus->height());
 
-
+    affTourCoul = scene->addRect(0, 0, 20, 10);
+    affTourCoul->setPos(LMaxTerrain + ((L - LMaxTerrain)/2) - 10, C*0.30);
+    affTourCoul->setBrush(colJ1);
 
     QPushButton * tirer = new QPushButton("Tirer");
     proxy = scene->addWidget(tirer);
     proxy->setPos(LMaxTerrain + ((L - LMaxTerrain)/2) - (tirer->width()/2), C*0.60);
     QObject::connect(tirer, SIGNAL(clicked(bool)), this, SLOT(tirer()));
+
+    QLCDNumber * nbMissile = new QLCDNumber;
+    nbMissile->setSegmentStyle(QLCDNumber::Flat);
+    nbMissile->setPalette(fondblanc);
+    QObject::connect(this, SIGNAL(changementNbMissile(int)), nbMissile, SLOT(display(int)));
+    proxy = scene->addWidget(nbMissile);
+    proxy->setPos(LMaxTerrain + selectMissile->width(), selectObus->height());
+
+    QLCDNumber * nbNuke = new QLCDNumber;
+    nbNuke->setSegmentStyle(QLCDNumber::Flat);
+    nbNuke->setPalette(fondblanc);
+    QObject::connect(this, SIGNAL(changementNbNuke(int)), nbNuke, SLOT(display(int)));
+    proxy = scene->addWidget(nbNuke);
+    proxy->setPos(LMaxTerrain + selectNuke->width(), selectMissile->height() + selectObus->height());
 
     this->setScene(scene);
     chargerTerrain();
@@ -273,6 +291,9 @@ void Jeu::afficherTankInit(Joueur *j1, Joueur *j2)
      tank2->setZValue(1);
      tankActuel = j1->getTank();
      imgTankActuel = tank1;
+
+     emit changementNbMissile(tankActuel->getNbObus2());
+     emit changementNbNuke(tankActuel->getNbObus3());
 }
 
 void Jeu::mettreAJourTank()
@@ -296,21 +317,28 @@ void Jeu::setTour(int newTour)
 void Jeu::changerTour()
 {
     tour += 1;
+    QBrush colJ1(Qt::blue);
+    QBrush colJ2(Qt::red);
     if(getTour() == J1){
         tankActuel = ter.getJ1()->getTank();
         tankActuel->setAngleDeTir(ter.getJ2()->getTank()->getAngleDeTir());
         //On met à jour angleDeTir et l'Horizon du tank qui prend le tour car sinon il sont à l'ancienne donné si on ne touche pas aux sliders.
         tankActuel->setHorizon(ter.getJ2()->getTank()->getHorizon());
         imgTankActuel = tank1;
+        affTourCoul->setBrush(colJ1);
     }
     else if(getTour() == J2){
         tankActuel = ter.getJ2()->getTank();
         imgTankActuel = tank2;
         tankActuel->setAngleDeTir(ter.getJ1()->getTank()->getAngleDeTir());
         tankActuel->setHorizon(ter.getJ1()->getTank()->getHorizon());
+        affTourCoul->setBrush(colJ2);
     }
     tankActuel->setCapacite(NMAX/10);
+    emit changementNbMissile(tankActuel->getNbObus2());
+    emit changementNbNuke(tankActuel->getNbObus3());
     emit changementTour(tour);
+
 }
 
 void Jeu::changerHorizonTankActuel(int newH)
@@ -330,26 +358,36 @@ void Jeu::selectObusType()
 
 void Jeu::selectMissileType(){
     setTypeProjectileSelected(T_MISSILE);
+    //Identifiant du missile
 }
 
 void Jeu::selectNukeType(){
+    //Identifiant bombe nucléaire
     setTypeProjectileSelected(T_NUKE);
 }
 
 void Jeu::tirer()
 {
-    Projectile* tir = tankActuel->useObus(tankActuel->getAdd(), tankActuel->getHorizon(), tankActuel->getAngleDeTir(), getTypeProjectileSelected());
-    QGraphicsPixmapItem *t = scene->addPixmap(tir->getTexture()->scaled(LMaxTerrain/NMAX/5, CMaxTerrain/NMAX/5));
-    t->setZValue(1);
-    QPoint pos((tir->getPointImpact().x() * LMaxTerrain/NMAX)+LMaxTerrain/NMAX/2, (tir->getPointImpact().y() * CMaxTerrain/NMAX)+CMaxTerrain/NMAX/2);
-    t->setPos(pos);
-    qDebug()<<"Jeu::tirer : tankActuel : Horizon :" << tankActuel->getHorizon() << " Angle : " << tankActuel->getAngleDeTir();
-    qDebug()<< "Jeu::tirer : Point d'impact de tir : " << tir->getPointImpact();
-    qDebug() << "Jeu::tirer : tailleImpact : " << tir->getTailleImpact();
-
-    destructionTerrain(tir);
-    mettreAJourTerrain();
-    delete tir;
+    Projectile* tir = tankActuel->useProjectile(tankActuel->getAdd(), tankActuel->getHorizon(), tankActuel->getAngleDeTir(), getTypeProjectileSelected());
+    if(tir != NULL){
+        if(getTypeProjectileSelected() == 1){
+            emit changementNbMissile(tankActuel->getNbObus2());
+        }
+        else if(getTypeProjectileSelected() == 2){
+            emit changementNbNuke(tankActuel->getNbObus3());
+        }
+        QGraphicsPixmapItem *t = scene->addPixmap(tir->getTexture()->scaled(LMaxTerrain/NMAX/5, CMaxTerrain/NMAX/5));
+        t->setZValue(1);
+        QPoint pos((tir->getPointImpact().x() * LMaxTerrain/NMAX)+LMaxTerrain/NMAX/2, (tir->getPointImpact().y() * CMaxTerrain/NMAX)+CMaxTerrain/NMAX/2);
+        t->setPos(pos);
+        qDebug()<<"Jeu::tirer : tankActuel : Horizon :" << tankActuel->getHorizon() << " Angle : " << tankActuel->getAngleDeTir();
+        qDebug()<< "Jeu::tirer : Point d'impact de tir : " << tir->getPointImpact();
+        qDebug() << "Jeu::tirer : tailleImpact : " << tir->getTailleImpact();
+        destructionTerrain(tir);
+        mettreAJourTerrain();
+        delete tir;
+        changerTour();
+    }
 }
 
 void Jeu::destructionTerrain(Projectile *tir){

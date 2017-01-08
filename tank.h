@@ -2,6 +2,9 @@
 #define TANK_H
 #define NBOBUS2 10
 #define NBOBUS3 5
+#define T_OBUS 0
+#define T_MISSILE 1
+#define T_NUKE 2
 
 #include <QPixmap>
 #include <QPoint>
@@ -32,9 +35,9 @@ private:
 public:
     Tank();
     bool isAlive();
-    Projectile *useObus1(QPoint posTank, int dir, int puis);
-    Projectile *useObus2(QPoint posTank, int dir, int puis);
-    Projectile *useObus3(QPoint posTank, int dir, int puis);
+    Projectile *useObus(QPoint posTank, int dir, int puis);
+    Projectile *useMissile(QPoint posTank, int dir, int puis);
+    Projectile *useNuke(QPoint posTank, int dir, int puis);
     int getNbObus2() const;
     int getNbObus3() const;
 
@@ -62,7 +65,7 @@ public:
     void setAngleDeTir(int value);
 
     ~Tank();
-    Projectile *useObus(QPoint posTank, int dir, int puis, int type);
+    Projectile *useProjectile(QPoint posTank, int dir, int puis, int type);
 };
 
 #endif // TANK_H

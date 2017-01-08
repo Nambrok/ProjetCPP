@@ -39,7 +39,6 @@
 #include "terrainnormal.h"
 #include "joueur.h"
 
-
 #include <QDebug>
 
 class Jeu : public QGraphicsView
@@ -56,6 +55,8 @@ private:
     QGraphicsPixmapItem *imgTankActuel;
     void keyPressEvent(QKeyEvent *event);
     int typeProjectileSelected;//0 obus, 1 missile, 2 nuke
+    QGraphicsRectItem * affTourCoul;
+
 
 public:
     Jeu(int L, int C);
@@ -79,6 +80,8 @@ public:
 signals:
     void changementTour(int tour);
     void fermeture();
+    void changementNbMissile(int newNbMissile);
+    void changementNbNuke(int newNbNuke);
 
 public slots:
     void changerTour();
