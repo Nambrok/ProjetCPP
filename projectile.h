@@ -3,6 +3,7 @@
 
 #include <QPoint>
 #include <QPixmap>
+#include <QDebug>
 
 class Projectile
 {

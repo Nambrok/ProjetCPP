@@ -79,9 +79,23 @@ void Jeu::setTypeProjectileSelected(int value)
 
 QPoint Jeu::identifierCase(QPoint p)
 {
-    QPoint o;
-    o.setX(p.x()/(LMaxTerrain/NMAX));
-    o.setY(p.y()/(CMaxTerrain/NMAX));
+    QPoint o(0, 0);
+    //On vérifie que le point p ne soit pas en dehors du terrain pour éviter de sortir du tableau et les coups non autorisés.
+    if(p.x()<0 || p.x()>LMaxTerrain){
+        qDebug() << "Point en dehors du terrain "<< p.x();
+
+    }
+    else{
+        o.setX(p.x()/(LMaxTerrain/NMAX));
+    }
+
+    if(p.y()<0 || p.y()>CMaxTerrain){
+        qDebug() << "Point en dehors du terrain " << p.y();
+    }
+    else{
+        o.setY(p.y()/(CMaxTerrain/NMAX));
+    }
+
     return o;
 }
 
@@ -148,7 +162,7 @@ Jeu::Jeu(int L, int C) : QGraphicsView()
 
     QSlider * slideAngle = new QSlider(Qt::Vertical);
     slideAngle->setPalette(fondblanc);
-    slideAngle->setRange(0, 91);
+    slideAngle->setRange(0, NMAX/3);
     QObject::connect(slideAngle, SIGNAL(valueChanged(int)), this, SLOT(changerAngleTirActuel(int)));
     proxy = scene->addWidget(slideAngle);
     proxy->setPos(LMaxTerrain + slideAngle->width(), C*0.60);
@@ -290,12 +304,13 @@ void Jeu::changerAngleTirActuel(int newA){
 
 void Jeu::tirer()
 {
-    Projectile* tir = tankActuel->useObus1(imgTankActuel->pos().toPoint(), tankActuel->getHorizon(), tankActuel->getAngleDeTir());
+    Projectile* tir = tankActuel->useObus1(tankActuel->getAdd(), tankActuel->getOrientation(), tankActuel->getAngleDeTir());
     QGraphicsPixmapItem *t = scene->addPixmap(tir->getTexture()->scaled(LMaxTerrain/NMAX/5, CMaxTerrain/NMAX/5));
     t->setZValue(1);
-    t->setPos(tir->getPointImpact() + QPoint((LMaxTerrain/NMAX)/2, (CMaxTerrain/NMAX)/2));
-    qDebug()<<"Jeu::tirer : tankActuel : Horizon :" << tankActuel->getHorizon() << " Angle : " << tankActuel->getAngleDeTir();
-    qDebug()<< "Jeu::tirer : Point d'impact de tir : " << tir->getPointImpact();
+    QPoint pos((tir->getPointImpact().x() * LMaxTerrain/NMAX)+LMaxTerrain/NMAX/2, (tir->getPointImpact().y() * CMaxTerrain/NMAX)+CMaxTerrain/NMAX/2);
+    t->setPos(pos);
+    //qDebug()<<"Jeu::tirer : tankActuel : Horizon :" << tankActuel->getHorizon() << " Angle : " << tankActuel->getAngleDeTir();
+    //qDebug()<< "Jeu::tirer : Point d'impact de tir : " << tir->getPointImpact();
     //qDebug() << tir->getTailleImpact();
 
     destructionTerrain(tir);
@@ -309,7 +324,7 @@ void Jeu::destructionTerrain(Projectile *tir){
     int valeurAEnlever = 10;
 
     if(tailleImpact == 1){
-        ter.setResistanceCase(identifierCase(tir->getPointImpact()), valeurAEnlever);
+        ter.setResistanceCase(tir->getPointImpact(), valeurAEnlever);
         qDebug()<< "Jeu::destructionTerrain : Point d'Impact de tir :" << pointImpact;
         qDebug()<< "Jeu::destructionTerrain : Case a endommager " << pointImpact.x()/NMAX << " " << pointImpact.y()/NMAX;
 
