@@ -329,19 +329,28 @@ void Jeu::destructionTerrain(Projectile *tir){
         qDebug()<< "Jeu::destructionTerrain : Point d'Impact de tir :" << pointImpact;
         qDebug()<< "Jeu::destructionTerrain : Case a endommager " << pointImpact.x()/NMAX << " " << pointImpact.y()/NMAX;
     }
-    else{
-        QPoint tmp = tir->getPointImpact();
-        ter.setResistanceCase(tmp, valeurAEnlever);
-        for(int i = 1; i<tailleImpact; i++){
-            for(int j = 1; j<tailleImpact; j++){
-                if(tmp.x() > 0 && tmp.y()>0){
-                    ter.setResistanceCase(QPoint(-tmp.x(), tmp.y()), valeurAEnlever);
-                    ter.setResistanceCase(QPoint(-tmp.x(), -tmp.y()), valeurAEnlever);
-                    ter.setResistanceCase(QPoint(tmp.x(), -tmp.y()), valeurAEnlever);
-                    ter.setResistanceCase(tmp, valeurAEnlever);
-                }
-            }
-        }
+    else if(tailleImpact == 2){
+        ter.setResistanceCase(pointImpact, valeurAEnlever);
+        ter.setResistanceCase(QPoint(pointImpact.x()+1, pointImpact.y()), valeurAEnlever);
+        ter.setResistanceCase(QPoint(pointImpact.x(), pointImpact.y()-1), valeurAEnlever);
+        ter.setResistanceCase(QPoint(pointImpact.x()-1, pointImpact.y()), valeurAEnlever);
+        ter.setResistanceCase(QPoint(pointImpact.x(), pointImpact.y()+1), valeurAEnlever);
+    }
+    else if(tailleImpact == 3){
+        ter.setResistanceCase(pointImpact, valeurAEnlever);
+        ter.setResistanceCase(QPoint(pointImpact.x()+1, pointImpact.y()), valeurAEnlever);
+        ter.setResistanceCase(QPoint(pointImpact.x(), pointImpact.y()-1), valeurAEnlever);
+        ter.setResistanceCase(QPoint(pointImpact.x()-1, pointImpact.y()), valeurAEnlever);
+        ter.setResistanceCase(QPoint(pointImpact.x(), pointImpact.y()+1), valeurAEnlever);
+        ter.setResistanceCase(QPoint(pointImpact.x(), pointImpact.y()-2), valeurAEnlever);
+        ter.setResistanceCase(QPoint(pointImpact.x(), pointImpact.y()), valeurAEnlever);
+        ter.setResistanceCase(QPoint(pointImpact.x()+1, pointImpact.y()-1), valeurAEnlever);
+        ter.setResistanceCase(QPoint(pointImpact.x()+2, pointImpact.y()), valeurAEnlever);
+        ter.setResistanceCase(QPoint(pointImpact.x()+1, pointImpact.y()+1), valeurAEnlever);
+        ter.setResistanceCase(QPoint(pointImpact.x(), pointImpact.y()+2), valeurAEnlever);
+        ter.setResistanceCase(QPoint(pointImpact.x()-1, pointImpact.y()+1), valeurAEnlever);
+        ter.setResistanceCase(QPoint(pointImpact.x()-2, pointImpact.y()), valeurAEnlever);
+        ter.setResistanceCase(QPoint(pointImpact.x()-1, pointImpact.y()-1), valeurAEnlever);
     }
 
 }
