@@ -39,7 +39,6 @@
 #include "terrainnormal.h"
 #include "joueur.h"
 
-
 #include <QDebug>
 
 class Jeu : public QGraphicsView
@@ -79,6 +78,8 @@ public:
 signals:
     void changementTour(int tour);
     void fermeture();
+    void changementNbMissile(int newNbMissile);
+    void changementNbNuke(int newNbNuke);
 
 public slots:
     void changerTour();
