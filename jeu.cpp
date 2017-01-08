@@ -358,15 +358,17 @@ void Jeu::selectObusType()
 
 void Jeu::selectMissileType(){
     setTypeProjectileSelected(T_MISSILE);
+    //Identifiant du missile
 }
 
 void Jeu::selectNukeType(){
+    //Identifiant bombe nucléaire
     setTypeProjectileSelected(T_NUKE);
 }
 
 void Jeu::tirer()
 {
-    Projectile* tir = tankActuel->useObus(tankActuel->getAdd(), tankActuel->getHorizon(), tankActuel->getAngleDeTir(), getTypeProjectileSelected());
+    Projectile* tir = tankActuel->useProjectile(tankActuel->getAdd(), tankActuel->getHorizon(), tankActuel->getAngleDeTir(), getTypeProjectileSelected());
     if(tir != NULL){
         if(getTypeProjectileSelected() == 1){
             emit changementNbMissile(tankActuel->getNbObus2());
