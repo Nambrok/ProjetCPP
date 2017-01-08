@@ -145,6 +145,7 @@ Tank::Tank()
     capacite = 100;
     setOrientation(rand()%4);
     setHorizon(0);
+    setAngleDeTir(0);
 }
 
 bool Tank::isAlive()
